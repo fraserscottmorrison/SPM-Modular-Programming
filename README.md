@@ -41,7 +41,7 @@ Package
 │   │
 │   └── Main (all MainActor)
 │       ├── Views/
-│       ├── PackageCoordination.swift
+│       ├── PackageCoordinator.swift
 │       └── PackageRoute.swift
 └── Tests
 ```
