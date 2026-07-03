@@ -10,6 +10,7 @@ In an era where features will be rapidly added to projects, a scalable, modular 
 
 - Keep the project extremely thin — less than 10 lines of code in total.
 - Rely on SPM packages for everything, from features to shared code and components.
+- Packages are self contained - mocks and unit tests (and even UI tests) are all contained within their package
 - Do not use the **Project → Package Dependencies** UI to add packages, as this modifies the `.xcodeproj` file and will make source control more difficult. Instead, drag local feature packages into the Project Navigator and use their `Package.swift` files to declare dependencies with local common and 3rd party packages.
 - Manage all dependencies through `Package.swift` files where possible. For third-party libraries, pin dependencies to exact versions to ensure all developers and CI/CD environments build the same code.
 - For structured concurrency, feature packages contain a **Main** target and a **Concurrent** target, providing a clear separation between `MainActor` code and concurrent code.
@@ -50,6 +51,7 @@ Package/
 ## Benefits
 - SPM Modular Programming handles inter-package architecture while allowing you to use your preferred intra-package architecture, such as MVVM or a unidirectional architecture.
 - Modular design that scales effectively for large projects.
+- Independent packages allows CI to run tests only for changed and affected packages
 - Only a single `.xcodeproj` file to maintain and no need for a `.xcworkspace` file.
 - Designed for agents. Say goodbye to vibe coding and welcome efficient, accurate agentic contributions through a well-defined architecture and optimized development harness.
 
