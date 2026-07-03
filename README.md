@@ -23,9 +23,9 @@ Project
 │   ├── Feature Package
 │   └── ...
 ├── Package Dependencies
-│   ├── Common Package (local or remote)
+│   ├── Common Packages (local or remote)
 │   ├── ...
-│   ├── 3rd Party Package
+│   ├── 3rd Party Packages
 │   └── ...
 ├── AGENTS.md
 └── Harness/
