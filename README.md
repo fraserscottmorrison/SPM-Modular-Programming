@@ -60,9 +60,9 @@ Give SPM Modular Programming a test drive with the example project. Features inc
 - A complete agentic development harness for efficient and accurate AI-assisted code contributions, leveraging the provided Xcode Templates.
 
 ## Limitations
-Every architecture has its strengths and weaknesses. If an author isn't clear about both, they either aren't being honest or don't understand the architecture deeply enough.
+Every architecture has its strengths and weaknesses. If an author isn't clear about both, they either aren't being honest or they don't understand the architecture deeply enough.
 - If your app includes a widget extension, most of the code can live in a package. However, certain classes must remain in the main project, such as `Widget`, `WidgetBundle`, `WidgetConfigurationIntent`, `AppIntentTimelineProvider`, and related types.
 - As mentioned above, `NavigationStack`s must be configured in a specific way to support inter-package routing. The example project demonstrates this approach.
 - Packages without assets do not generate a bundle. I prefer every package to expose a consistent bundle interface, so I add a dummy asset as a workaround.
 - Prior to Swift 6 packages were limited to `DEBUG` and `RELEASE` configurations through a poorly documented heuristics-based system. While this can be worked around, Swift now provides traits to improve the situation.
-Apple, if you're reading this, please consider addressing these limitations
+- Apple, if you're reading this, please consider addressing these limitations
