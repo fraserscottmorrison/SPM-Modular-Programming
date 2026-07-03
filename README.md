@@ -1,4 +1,5 @@
 # Swift Package Manager Modular Programming
+
 <p align="center">
 <img width="200" height="200" alt="SPM Modular Programming" src="https://github.com/user-attachments/assets/ab698fd0-b1bb-45b3-8903-80160e096d7b" />
 </p>
@@ -14,7 +15,6 @@ In an era where features can be rapidly added to projects, a scalable modular ar
 - For structured concurrency, feature packages contain a **Main** target and a **Concurrent** target, providing a clear separation between `MainActor` code and concurrent code.
 
 ## Project Structure
-
 ```text
 Project
 ├── App
@@ -22,11 +22,12 @@ Project
 ├── Packages
 │   ├── Feature Package
 │   └── ...
-└── Package Dependencies
-    ├── Common Package (local or remote)
-    ├── ...
-    ├── 3rd Party Package
-    └── ...
+├── Package Dependencies
+│   ├── Common Package (local or remote)
+│   ├── ...
+│   ├── 3rd Party Package
+│   └── ...
+└── Harness/
 ```
 
 ## Feature Package Structure
@@ -44,6 +45,7 @@ Package
 │       └── PackageRoute.swift
 └── Tests
 ```
+
 ## Benefits
 - SPM Modular Programming handles inter-package architecture while allowing you to use your preferred intra-package architecture, such as MVVM or a unidirectional architecture.
 - Modular design that scales effectively for large projects.
