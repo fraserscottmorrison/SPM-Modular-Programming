@@ -60,6 +60,9 @@ Give SPM Modular Programming a test drive with the reference project. Features i
 - Xcode Templates to quickly generate new packages and views.
 - A complete agentic development harness for efficient and accurate agentic code contributions, leveraging the provided Xcode Templates.
 
+## Harness
+The reference project include agentic harness documentation optimised for agents to accurately contribute features.
+
 ## Limitations
 Every architecture has its strengths and weaknesses. If an author isn't clear about both, they either aren't being honest or they don't understand the architecture deeply enough.
 - If your app includes a widget extension, most of the code can live in a package. However, certain classes must remain in the main project, such as `Widget`, `WidgetBundle`, `WidgetConfigurationIntent`, `AppIntentTimelineProvider`, and related types.
