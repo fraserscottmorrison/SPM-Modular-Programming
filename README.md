@@ -53,17 +53,17 @@ Package/
 - Only a single `.xcodeproj` file to maintain and no need for a `.xcworkspace` file.
 - Designed for agents. Say goodbye to vibe coding and welcome efficient, accurate agentic contributions through a well-defined architecture and optimized development harness.
 
-## Example Project
-Give SPM Modular Programming a test drive with the example project. Features include:
+## Reference Project
+Give SPM Modular Programming a test drive with the reference project. Features include:
 - SwiftUI with an MVVM-C intra-package architecture.
-- `NavigationStack`s configured for inter-package routing. See the example project for implementation details.
+- `NavigationStack`s configured for inter-package routing. See the reference project for implementation details.
 - Xcode Templates to quickly generate new packages and views.
 - A complete agentic development harness for efficient and accurate agentic code contributions, leveraging the provided Xcode Templates.
 
 ## Limitations
 Every architecture has its strengths and weaknesses. If an author isn't clear about both, they either aren't being honest or they don't understand the architecture deeply enough.
 - If your app includes a widget extension, most of the code can live in a package. However, certain classes must remain in the main project, such as `Widget`, `WidgetBundle`, `WidgetConfigurationIntent`, `AppIntentTimelineProvider`, and related types.
-- As mentioned above, `NavigationStack`s must be configured in a specific way to support inter-package routing. The example project demonstrates this approach.
+- As mentioned above, `NavigationStack`s must be configured in a specific way to support inter-package routing. The reference project demonstrates this approach.
 - Packages without assets do not generate a bundle. I prefer every package to expose a consistent bundle interface, so I add a dummy asset as a workaround.
 - Prior to Swift 6 packages were limited to `DEBUG` and `RELEASE` configurations through a poorly documented heuristics-based system. While this can be worked around, Swift now provides traits to improve the situation.
 - Apple, if you're reading this, please consider addressing these limitations
