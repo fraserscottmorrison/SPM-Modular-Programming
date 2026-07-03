@@ -2,17 +2,19 @@
 
 <img width="200" height="200" alt="SPM Modular Programming" src="https://github.com/user-attachments/assets/ab698fd0-b1bb-45b3-8903-80160e096d7b" />
 
-In an era where features can be rapidly added to projects a scalable modular architecture is vital to support this growth
+In an era where features can be rapidly added to projects, a scalable modular architecture is vital to support growth.
 
 ## Concept
- - The project is kept extremely thin; < 10 lines of code total!
- - Rely on SPM packages for everything, from featues to shared code and compnents
- - Do not us the Project->Package Dependencies UI for adding Packages as this modifies the xcodeproj file making source control more difficult. Instead just drag the local feature packages into the Project Navigator and use its Package.swift to pull in local common packages
- - Try to manage all dependencies via Package.swift files and for 3rd party libraries pin to an exact version to ensure all developers, and CI/DC, builds the same code
- - For Structured Concurrency: Feature Packages have a Main target and a Concurrent target to have a clear division of MainActor code vs concurrent code
+
+- Keep the project extremely thin — less than 10 lines of code in total.
+- Rely on SPM packages for everything, from features to shared code and components.
+- Do not use the **Project → Package Dependencies** UI to add packages, as this modifies the `.xcodeproj` file and can make source control more difficult. Instead, drag local feature packages into the Project Navigator and use their `Package.swift` files to pull in local common packages.
+- Manage all dependencies through `Package.swift` files where possible. For third-party libraries, pin dependencies to exact versions to ensure all developers and CI/CD environments build the same code.
+- For structured concurrency, feature packages contain a **Main** target and a **Concurrent** target, providing a clear separation between `MainActor` code and concurrent code.
 
 ## Project Structure
-``` 
+
+```text
 Project
 ├── App
 │   └── App.swift
@@ -27,40 +29,37 @@ Project
 ```
 
 ## Feature Package Structure
-``` 
+```text
 Package
 ├── Package.swift
 ├── Sources
-│   ├── Concurrent/
-│   │    ├── Models/ (Sendable)
-│   │    └── Service.swift (actor)
-│   │ 
-│   └── Main/ (all MainActor)
-│        ├── Views/
-│        ├── PackageCoordination.swift
-│        └── PackageRoute.swift
-└──  Tests
+│   ├── Concurrent
+│   │   ├── Models/ (Sendable)
+│   │   └── Service.swift (actor)
+│   │
+│   └── Main (all MainActor)
+│       ├── Views/
+│       ├── PackageCoordination.swift
+│       └── PackageRoute.swift
+└── Tests
 ```
-
 ## Benefits
- - SPM Modular Programming handles the inter-package architecture while you keep your preferried intra-package architcture eg MVVM or unidirectional architecture
- - Modular design for scaling large projects
- - Only a single .xcodeproj file to maintain and no .xcworkspace
- - Designed for agents. Say goodbye to vibe coding and welcome in efficient and accurate agentic contribution thanks to the well defined archtecture and optimised harness
- - 
+- SPM Modular Programming handles inter-package architecture while allowing you to use your preferred intra-package architecture, such as MVVM or a unidirectional architecture.
+- Modular design that scales effectively for large projects.
+- Only a single `.xcodeproj` file to maintain, with no `.xcworkspace` required.
+- Designed for AI agents. Say goodbye to vibe coding and welcome efficient, accurate agentic contributions through a well-defined architecture and optimized development harness.
 
 ## Example Project
-Give SPM Modular Programming a test drive with the example project; features include
- - SwiftUI, MVVM-C intra package architecture
- - NavigationStacks needs to be setup in a particular manner for inter package routing. See how to do it here
- - Xcode Templates to quickly generate new packages and views
- - Full agentic harness, for efficent and accurate agentic code contributions, leveraging the Xcode Templates
-
+Give SPM Modular Programming a test drive with the example project. Features include:
+- SwiftUI with an MVVM-C intra-package architecture.
+- `NavigationStack`s configured for inter-package routing. See the example project for implementation details.
+- Xcode Templates to quickly generate new packages and views.
+- A complete agentic development harness for efficient and accurate AI-assisted code contributions, leveraging the provided Xcode Templates.
 
 ## Limitations
-Every architecture has it's upsides and downsides. If an author isn't making them both clear they're not being honest or doesn't know it deeply enough
- - If you have a widget extension, most of the code can be in a package, but certain classes must unfortunately be kept in the main project eg Widget, WidgetBundle, WidgetConfigurationInntent, AppIntentTimelineProvider
- - As mentioned above NavigationStacks needs to be setup in a particular manner for inter package routing. The example project demonstrates how
- - Packages without assets do not generate a bundle. I like to have a standard interface for the bundle of every package so as a workaround I add a dummy asset
- - Packages used to be limited to DEBUG and RELEASE based on a poorly documented "heuristics" system. This can be worked with, but Swift has added support for traits to improve this
- - Apple, if you're reading this, please consider addressing these limitations 
+Every architecture has its strengths and weaknesses. If an author isn't clear about both, they either aren't being honest or don't understand the architecture deeply enough.
+- If your app includes a widget extension, most of the code can live in a package. However, certain classes must remain in the main project, such as `Widget`, `WidgetBundle`, `WidgetConfigurationIntent`, `AppIntentTimelineProvider`, and related types.
+- As mentioned above, `NavigationStack`s must be configured in a specific way to support inter-package routing. The example project demonstrates this approach.
+- Packages without assets do not generate a bundle. I prefer every package to expose a consistent bundle interface, so I add a dummy asset as a workaround.
+- Prior to Swift 6 packages were limited to `DEBUG` and `RELEASE` configurations through a poorly documented heuristics-based system. While this can be worked around, Swift now provides traits to improve the situation.
+Apple, if you're reading this, please consider addressing these limitations
