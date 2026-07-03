@@ -20,7 +20,7 @@ Project
 ├── App
 │   └── App.swift
 ├── Packages
-│   ├── Feature Package
+│   ├── Feature Packages
 │   └── ...
 ├── Package Dependencies
 │   ├── Common Packages (local or remote)
