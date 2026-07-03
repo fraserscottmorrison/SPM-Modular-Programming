@@ -32,18 +32,18 @@ Project
 
 ## Feature Package Structure
 ```text
-Package
+Package/
 ├── Package.swift
 ├── Sources
-│   ├── Concurrent
+│   ├── Concurrent/
 │   │   ├── Models/ (Sendable)
 │   │   └── Service.swift (actor)
 │   │
-│   └── Main (all MainActor)
+│   └── Main/ (all MainActor)
 │       ├── Views/
 │       ├── PackageCoordinator.swift
 │       └── PackageRoute.swift
-└── Tests
+└── Tests/
 ```
 
 ## Benefits
