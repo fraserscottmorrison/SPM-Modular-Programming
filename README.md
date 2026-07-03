@@ -10,7 +10,7 @@ In an era where features can be rapidly added to projects, a scalable modular ar
 
 - Keep the project extremely thin — less than 10 lines of code in total.
 - Rely on SPM packages for everything, from features to shared code and components.
-- Do not use the **Project → Package Dependencies** UI to add packages, as this modifies the `.xcodeproj` file and can make source control more difficult. Instead, drag local feature packages into the Project Navigator and use their `Package.swift` files to pull in local common packages.
+- Do not use the **Project → Package Dependencies** UI to add packages, as this modifies the `.xcodeproj` file and will make source control more difficult. Instead, drag local feature packages into the Project Navigator and use their `Package.swift` files to pull in local common packages.
 - Manage all dependencies through `Package.swift` files where possible. For third-party libraries, pin dependencies to exact versions to ensure all developers and CI/CD environments build the same code.
 - For structured concurrency, feature packages contain a **Main** target and a **Concurrent** target, providing a clear separation between `MainActor` code and concurrent code.
 
