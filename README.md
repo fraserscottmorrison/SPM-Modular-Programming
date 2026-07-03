@@ -27,6 +27,7 @@ Project
 │   ├── ...
 │   ├── 3rd Party Package
 │   └── ...
+├── AGENTS.md
 └── Harness/
 ```
 
@@ -49,15 +50,15 @@ Package/
 ## Benefits
 - SPM Modular Programming handles inter-package architecture while allowing you to use your preferred intra-package architecture, such as MVVM or a unidirectional architecture.
 - Modular design that scales effectively for large projects.
-- Only a single `.xcodeproj` file to maintain, with no `.xcworkspace` required.
-- Designed for AI agents. Say goodbye to vibe coding and welcome efficient, accurate agentic contributions through a well-defined architecture and optimized development harness.
+- Only a single `.xcodeproj` file to maintain and no need for a `.xcworkspace` file.
+- Designed for agents. Say goodbye to vibe coding and welcome efficient, accurate agentic contributions through a well-defined architecture and optimized development harness.
 
 ## Example Project
 Give SPM Modular Programming a test drive with the example project. Features include:
 - SwiftUI with an MVVM-C intra-package architecture.
 - `NavigationStack`s configured for inter-package routing. See the example project for implementation details.
 - Xcode Templates to quickly generate new packages and views.
-- A complete agentic development harness for efficient and accurate AI-assisted code contributions, leveraging the provided Xcode Templates.
+- A complete agentic development harness for efficient and accurate agentic code contributions, leveraging the provided Xcode Templates.
 
 ## Limitations
 Every architecture has its strengths and weaknesses. If an author isn't clear about both, they either aren't being honest or they don't understand the architecture deeply enough.
