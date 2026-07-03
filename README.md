@@ -1,6 +1,7 @@
 # Swift Package Manager Modular Programming
-
+<p align="center">
 <img width="200" height="200" alt="SPM Modular Programming" src="https://github.com/user-attachments/assets/ab698fd0-b1bb-45b3-8903-80160e096d7b" />
+</p>
 
 In an era where features can be rapidly added to projects, a scalable modular architecture is vital to support growth.
 
