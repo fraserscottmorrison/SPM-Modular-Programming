@@ -1,0 +1,3 @@
+# Detail
+
+Detail package scaffold.

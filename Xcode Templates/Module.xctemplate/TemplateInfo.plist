@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SupportsSwiftPackage</key>
+	<true/>
+	<key>Kind</key>
+	<string>Xcode.IDEFoundation.TextSubstitutionFileTemplateKind</string>
+	<key>Identifier</key>
+	<string>com.app.module</string>
+	<key>Description</key>
+	<string>A SPM-Modular-Programming Swift package module</string>
+	<key>Summary</key>
+	<string>SPM-Modular-Programming Module</string>
+	<key>Concrete</key>
+	<true/>
+	<key>SortOrder</key>
+	<string>2</string>
+	<key>AllowedTypes</key>
+	<array>
+		<string>public.swift-source</string>
+	</array>
+	<key>Platforms</key>
+	<array>
+		<string>com.apple.platform.iphoneos</string>
+	</array>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Identifier</key>
+			<string>module</string>
+			<key>Name</key>
+			<string>Module:</string>
+			<key>Description</key>
+			<string>The name of the module, e.g Entry</string>
+			<key>Type</key>
+			<string>text</string>
+			<key>Required</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>viewName</string>
+			<key>Name</key>
+			<string>Initial View Name:</string>
+			<key>Description</key>
+			<string>The name of the initial view, e.g TabStack</string>
+			<key>Type</key>
+			<string>text</string>
+			<key>Required</key>
+			<true/>
+		</dict>
+	</array>
+	<key>Icon</key>
+	<string>TemplateIcon</string>
+</dict>
+</plist>

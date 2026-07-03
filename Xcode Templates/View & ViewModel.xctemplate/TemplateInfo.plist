@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SupportsSwiftPackage</key>
+	<true/>
+	<key>Kind</key>
+	<string>Xcode.IDEFoundation.TextSubstitutionFileTemplateKind</string>
+	<key>Identifier</key>
+	<string>com.app.view_viewmodel</string>
+	<key>Description</key>
+	<string>A SwiftUI view with a view model</string>
+	<key>Summary</key>
+	<string>SwiftUI View &amp; ViewModel</string>
+	<key>Concrete</key>
+	<true/>
+	<key>SortOrder</key>
+	<string>1</string>
+	<key>AllowedTypes</key>
+	<array>
+		<string>public.swift-source</string>
+	</array>
+	<key>Platforms</key>
+	<array>
+		<string>com.apple.platform.iphoneos</string>
+	</array>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Identifier</key>
+			<string>viewName</string>
+			<key>Name</key>
+			<string>View Name:</string>
+			<key>Description</key>
+			<string>The name of the view</string>
+			<key>Type</key>
+			<string>text</string>
+			<key>Required</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>module</string>
+			<key>Name</key>
+			<string>Module:</string>
+			<key>Description</key>
+			<string>The module the file belongs to, e.g Detail or Entry</string>
+			<key>Type</key>
+			<string>text</string>
+			<key>Required</key>
+			<true/>
+		</dict>
+	</array>
+	<key>Icon</key>
+	<string>TemplateIcon</string>
+</dict>
+</plist>
