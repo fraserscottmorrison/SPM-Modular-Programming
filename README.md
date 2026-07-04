@@ -70,5 +70,5 @@ Every architecture has its strengths and weaknesses. If an author isn't clear ab
 - If your app includes a widget extension, most of the code can live in a package. However, certain classes must remain in the main project, such as `Widget`, `WidgetBundle`, `WidgetConfigurationIntent`, `AppIntentTimelineProvider`, and related types.
 - As mentioned above, `NavigationStack`s must be configured in a specific way to support inter-package routing. The reference project demonstrates this approach.
 - Packages without assets do not generate a bundle. I prefer every package to expose a consistent bundle interface, so I add a dummy asset as a workaround.
-- Prior to Swift 6 packages were limited to `DEBUG` and `RELEASE` configurations through a poorly documented heuristics-based system. While this can be worked around, Swift now provides traits to improve the situation.
+- Prior to Swift 6 packages were limited to `DEBUG` and `RELEASE` configurations through a poorly documented heuristics-based system. While this can be worked around, Swift now provides traits to improve the situation - thank you Swift team
 - Apple, if you're reading this, please consider addressing these limitations
