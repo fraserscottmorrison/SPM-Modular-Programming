@@ -17,13 +17,13 @@ In an era where features will be rapidly added to projects, a scalable, modular 
 
 ## Project Structure
 ```text
-Project
-├── App
+Xcode Project
+├── App/
 │   └── App.swift
-├── Packages
+├── Packages/
 │   ├── Feature Packages
 │   └── ...
-├── Package Dependencies
+├── Package Dependencies/
 │   ├── Common Packages (local or remote)
 │   ├── ...
 │   ├── 3rd Party Packages
@@ -36,7 +36,7 @@ Project
 ```text
 Package/
 ├── Package.swift
-├── Sources
+├── Sources/
 │   ├── Concurrent/
 │   │   ├── Models/ (Sendable)
 │   │   └── Service.swift (actor)
