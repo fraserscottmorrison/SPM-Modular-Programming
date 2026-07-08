@@ -2,18 +2,19 @@ import SwiftUI
 import Tools
 import Detail
 
-/// Displays the Entry tabs and their independent navigation stacks.
+/// Displays tab items and their independent navigation stacks.
 public struct TabStack: View {
 
-    @StateObject internal var viewModel: ViewModel
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @State internal var viewModel: ViewModel
     @State private var refreshIds: [Int: String] = [:]
 
     public init(router: Binding<Router<EntryRoute>>) {
-        _viewModel = StateObject(wrappedValue: ViewModel(router: router))
+        _viewModel = State(initialValue: ViewModel(router: router))
     }
 
     var selectedPath: NavigationPath {
-        return viewModel.tabPaths[viewModel.selectedTabIndex]
+        return viewModel.tabPaths[selectedTabIndex]
     }
 
     func getPath(index: Int) -> Binding<NavigationPath> {
@@ -21,50 +22,107 @@ public struct TabStack: View {
     }
 
     public var body: some View {
-        TabView(selection: $viewModel.selectedTab) {
-            ForEach(Array(ViewModel.Tab.allCases.enumerated()), id: \.element) { index, tab in
-                Group {
-                    NavigationStack(path: getPath(index: index)) {
-                        DetailCoordinator(path: getPath(index: index), initialRoute: .initialRoute(tab.rawValue))
-                            .id(refreshIds[index] ?? "\(index)")
-                    }
-                    .ignoresSafeArea()
-                }
-                .tabItem {
-                    Label(tab.rawValue, systemImage: "\(index + 1).circle")
-                }
-                .tag(tab)
+        Group {
+            if shouldUseTabBar {
+                tabBarLayout
+            } else {
+                splitViewWithTabsAsSidebarLayout
             }
         }
         .tint(.red)
         .navigationViewStyle(StackNavigationViewStyle())
     }
 
-    private func tabSelection() -> Binding<Int> {
+    private var isRegularWidth: Bool {
+        horizontalSizeClass == .regular
+    }
+
+    private var shouldUseTabBar: Bool {
+        return isRegularWidth == false || TabStack.iPadTabBarEnabled
+    }
+
+    private var selectedTabIndex: Int {
+        index(for: viewModel.selectedTab)
+    }
+
+    private var selectedTab: Binding<ViewModel.Tab> {
         Binding {
-            return self.viewModel.selectedTabIndex
-        } set: { tappedTab in
-
-
-
-            if tappedTab == self.viewModel.selectedTabIndex {
-
-
-                if self.selectedPath.isEmpty {
-                    self.refreshIds[tappedTab] = UUID().uuidString
-
-                } else {
-
-                    self.selectedPathPopToRoot()
-                }
-            }
-
-            self.viewModel.selectedTabIndex = tappedTab
+            viewModel.selectedTab
+        } set: { tab in
+            viewModel.selectedTab = tab
+            viewModel.selectedTabIndex = index(for: tab)
         }
     }
 
-    private func selectedPathPopToRoot() {
-        viewModel.tabPaths[self.viewModel.selectedTabIndex] = NavigationPath()
+    private var selectedSidebarTab: Binding<ViewModel.Tab?> {
+        Binding {
+            viewModel.selectedTab
+        } set: { tab in
+            guard let tab else { return }
+            viewModel.selectedTab = tab
+            viewModel.selectedTabIndex = index(for: tab)
+        }
+    }
+
+    private var tabItems: [(offset: Int, element: ViewModel.Tab)] {
+        Array(ViewModel.Tab.allCases.enumerated())
+    }
+
+    @ViewBuilder private var tabBarLayout: some View {
+        TabView(selection: selectedTab) {
+            ForEach(tabItems, id: \.element) { index, tab in
+                tabContent(for: tab, index: index)
+                    .tabItem {
+                        Label(tab.rawValue, systemImage: tabIconName(for: index))
+                    }
+                    .tag(tab)
+            }
+        }
+    }
+
+    @ViewBuilder private var splitViewWithTabsAsSidebarLayout: some View {
+        NavigationSplitView {
+            List(selection: selectedSidebarTab) {
+                ForEach(tabItems, id: \.element) { index, tab in
+                    Label(tab.rawValue, systemImage: tabIconName(for: index))
+                        .tag(tab)
+                }
+            }
+        } detail: {
+            navigationStackLayout(for: viewModel.selectedTab, index: selectedTabIndex)
+        }
+    }
+
+    @ViewBuilder private func tabContent(for tab: ViewModel.Tab, index: Int) -> some View {
+        if isRegularWidth && tab.isSplitView {
+            splitViewLayout(for: tab, index: index)
+        } else {
+            navigationStackLayout(for: tab, index: index)
+        }
+    }
+
+    @ViewBuilder private func splitViewLayout(for tab: ViewModel.Tab, index: Int) -> some View {
+        NavigationSplitView {
+            Label(tab.rawValue, systemImage: tabIconName(for: index))
+        } detail: {
+            navigationStackLayout(for: tab, index: index)
+        }
+    }
+
+    @ViewBuilder private func navigationStackLayout(for tab: ViewModel.Tab, index: Int) -> some View {
+        NavigationStack(path: getPath(index: index)) {
+            DetailCoordinator(path: getPath(index: index), initialRoute: .initialRoute(tab.rawValue))
+                .id(refreshIds[index] ?? "\(index)")
+        }
+        .ignoresSafeArea()
+    }
+
+    private func index(for tab: ViewModel.Tab) -> Int {
+        return ViewModel.Tab.allCases.firstIndex(of: tab) ?? 0
+    }
+
+    private func tabIconName(for index: Int) -> String {
+        return "\(index + 1).circle"
     }
 }
 

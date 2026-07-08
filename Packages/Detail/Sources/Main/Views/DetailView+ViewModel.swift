@@ -1,13 +1,15 @@
 import Foundation
+import Observation
 import Tools
 import SwiftUI
 
 extension DetailView {
     /// Manages DetailView state, title data, and routed actions.
-    @MainActor final class ViewModel: VMProtocol, ObservableObject {
+    @MainActor @Observable final class ViewModel: VMProtocol {
 
+        @ObservationIgnored
         @Binding var router: Router<DetailRoute>
-        @Published var state: ViewState = .loaded
+        var state: ViewState = .loaded
         var title: String
 
         init(router: Binding<Router<DetailRoute>>, title: String) {
