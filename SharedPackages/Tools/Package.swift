@@ -19,10 +19,12 @@ let package = Package(
             dependencies: [],
             path: "Sources",
             exclude: [],
-            resources: []),
+            resources: []
+        ),
         .testTarget(
             name: "ToolsTests",
             dependencies: ["Tools"],
-            path: "Tests")
+            path: "Tests"
+        )
     ]
 )

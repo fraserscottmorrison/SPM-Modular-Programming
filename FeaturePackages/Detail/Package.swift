@@ -18,12 +18,16 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Detail",
+            name: "DetailConcurrent",
             dependencies: ["Tools"],
+            path: "Sources/Concurrent"
+        ),
+        .target(
+            name: "Detail",
+            dependencies: ["DetailConcurrent", "Tools"],
             path: "Sources/Main",
             resources: [.process("Resources")]
         ),
-
         .testTarget(
             name: "DetailUnitTests",
             dependencies: ["Detail"],

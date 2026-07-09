@@ -19,18 +19,19 @@
 			containerPortal = F9D816642F679133002CA898 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F9D8166B2F679133002CA898;
-			remoteInfo = SPM-Modular-Programming;
+			remoteInfo = "SPM-Modular-Programming";
 		};
 		F9D816902F679135002CA898 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F9D816642F679133002CA898 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F9D8166B2F679133002CA898;
-			remoteInfo = SPM-Modular-Programming;
+			remoteInfo = "SPM-Modular-Programming";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C50FF6B2FFFAA3100DDA397 /* Tools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Tools; sourceTree = "<group>"; };
 		F93AE69F2FF61AC000840F84 /* Entry */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Entry; sourceTree = "<group>"; };
 		F940F2572FF7401A0042CA8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F949CF602FF3D1D900563A00 /* ModularProgrammingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModularProgrammingApp.swift; sourceTree = "<group>"; };
@@ -67,6 +68,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C50FF6A2FFFA9FA00DDA397 /* SharedPackages */ = {
+			isa = PBXGroup;
+			children = (
+				4C50FF6B2FFFAA3100DDA397 /* Tools */,
+			);
+			path = SharedPackages;
+			sourceTree = "<group>";
+		};
 		F949CF772FF3D27500563A00 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,7 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				F949CF772FF3D27500563A00 /* App */,
-				F9D816BC2F679170002CA898 /* Packages */,
+				F9D816BC2F679170002CA898 /* FeaturePackages */,
+				4C50FF6A2FFFA9FA00DDA397 /* SharedPackages */,
 				F9D8166D2F679133002CA898 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -96,13 +106,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F9D816BC2F679170002CA898 /* Packages */ = {
+		F9D816BC2F679170002CA898 /* FeaturePackages */ = {
 			isa = PBXGroup;
 			children = (
 				F93AE69F2FF61AC000840F84 /* Entry */,
 				F9C6B3212FF68B3A0016DB29 /* Detail */,
 			);
-			path = Packages;
+			path = FeaturePackages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,7 +134,7 @@
 			packageProductDependencies = (
 				F93AE6A12FF61C6D00840F84 /* Entry */,
 			);
-			productName = SPM-Modular-Programming;
+			productName = "SPM-Modular-Programming";
 			productReference = F9D8166C2F679133002CA898 /* SPM-Modular-Programming.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -144,7 +154,7 @@
 			name = "SPM-Modular-ProgrammingTests";
 			packageProductDependencies = (
 			);
-			productName = SPM-Modular-ProgrammingTests;
+			productName = "SPM-Modular-ProgrammingTests";
 			productReference = F9D816852F679135002CA898 /* SPM-Modular-ProgrammingTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -164,7 +174,7 @@
 			name = "SPM-Modular-ProgrammingUITests";
 			packageProductDependencies = (
 			);
-			productName = SPM-Modular-ProgrammingUITests;
+			productName = "SPM-Modular-ProgrammingUITests";
 			productReference = F9D8168F2F679135002CA898 /* SPM-Modular-ProgrammingUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -419,6 +429,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -434,9 +447,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iha.ModularProgramming;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 			};
 			name = Debug;
 		};
@@ -463,8 +480,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.iha.ModularProgramming;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 			};
 			name = Release;
 		};

@@ -2,6 +2,7 @@ import Foundation
 import Observation
 import Tools
 import SwiftUI
+import DetailConcurrent
 
 extension DetailView {
     /// Manages DetailView state, title data, and routed actions.

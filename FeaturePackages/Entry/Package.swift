@@ -19,8 +19,13 @@ let package = Package(
     ],
     targets: [
         .target(
+            name: "EntryConcurrent",
+            dependencies: ["Tools"],
+            path: "Sources/Concurrent"
+        ),
+        .target(
             name: "Entry",
-            dependencies: ["Detail", "Tools"],
+            dependencies: ["EntryConcurrent", "Detail", "Tools"],
             path: "Sources/Main"
         ),
         .testTarget(
