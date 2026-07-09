@@ -1,30 +1,25 @@
-import XCTest
-@testable import Detail
+import Testing
 import Tools
+@testable import Detail
 
-@MainActor
 /// Verifies DetailView.ViewModel state transitions.
-final class DetailViewModelTests: XCTestCase {
+struct TabStackViewModelTests {
 
-    var viewModel: DetailView.ViewModel!
-
-    override func setUp() async throws {
-        try await super.setUp()
-        viewModel = DetailView.ViewModel(router: PreviewRouter<DetailRoute>().routerBinding, title: "Preview")
+    @Test func testInitialStateIsLoaded() async throws {
+        let viewModel = await makeViewModel()
+        
+        #expect(await viewModel.state == .loaded)
     }
-
-    override func tearDown() async throws {
-        try await super.tearDown()
-        viewModel = nil
-    }
-
-    func testInitialStateIsLoaded() {
-        XCTAssertEqual(viewModel.state, .loaded)
-    }
-
-    func testOnAppearSetsLoadedState() async {
+    
+    @Test func testOnAppearSetsLoadedState() async throws {
+        let viewModel = await makeViewModel()
+        
         await viewModel.handle(action: .onAppear)
-
-        XCTAssertEqual(viewModel.state, .loaded)
+        
+        #expect(await viewModel.state == .loaded)
+    }
+    
+    private func makeViewModel() async  -> DetailView.ViewModel {
+        await DetailView.ViewModel(router: PreviewRouter<DetailRoute>().routerBinding, title: "Preview")
     }
 }

@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Supplies in-memory router bindings for previews and tests.
-@MainActor public class PreviewRouter<R> where R: Route {
+open class PreviewRouter<R> where R: Route {
 
     public var navPathBinding: Binding<NavigationPath>
     public var routerBinding: Binding<Router<R>>

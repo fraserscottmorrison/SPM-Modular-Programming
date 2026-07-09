@@ -1,27 +1,26 @@
-import XCTest
-@testable import Entry
+import Testing
 import Tools
+@testable import Entry
 
-@MainActor
 /// Verifies TabStack.ViewModel initial state and actions.
-final class TabStackViewModelTests: XCTestCase {
+struct TabStackViewModelTests {
 
-    func testInitialStateUsesFirstTab() {
-        let viewModel = makeViewModel()
-
-        XCTAssertEqual(viewModel.state, .idle)
-        XCTAssertEqual(viewModel.selectedTab, .first)
+    @Test func testInitialStateUsesFirstTab() async throws {
+        let viewModel = await makeViewModel()
+        
+        #expect(await viewModel.state == .idle)
+        #expect(await viewModel.selectedTab == .first)
     }
-
-    func testOnAppearSetsLoadedState() async {
-        let viewModel = makeViewModel()
-
+    
+    @Test func testOnAppearSetsLoadedState() async throws {
+        let viewModel = await makeViewModel()
+        
         await viewModel.handle(action: .onAppear)
-
-        XCTAssertEqual(viewModel.state, .loaded)
+        
+        #expect(await viewModel.state == .loaded)
     }
-
-    private func makeViewModel() -> TabStack.ViewModel {
-        TabStack.ViewModel(router: PreviewRouter<EntryRoute>().routerBinding)
+    
+    private func makeViewModel() async  -> TabStack.ViewModel {
+        await TabStack.ViewModel(router: PreviewRouter<EntryRoute>().routerBinding)
     }
 }

@@ -1,0 +1,43 @@
+{
+  "configurations" : [
+    {
+      "id" : "2BD10C88-CAF7-4D08-952E-318F14F582EE",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:SPM-Modular-Programming.xcodeproj",
+      "identifier" : "F9D8166B2F679133002CA898",
+      "name" : "SPM-Modular-Programming"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:FeaturePackages\/Entry",
+        "identifier" : "EntryUnitTests",
+        "name" : "EntryUnitTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SharedPackages\/Tools",
+        "identifier" : "ToolsTests",
+        "name" : "ToolsTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:FeaturePackages\/Detail",
+        "identifier" : "DetailUnitTests",
+        "name" : "DetailUnitTests"
+      }
+    }
+  ],
+  "version" : 1
+}
