@@ -43,6 +43,14 @@
 		F9D8168F2F679135002CA898 /* SPM-Modular-ProgrammingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SPM-Modular-ProgrammingUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		4CA50B7930024E4A0069FA9C /* XCConfigs */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = XCConfigs;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		F9D816692F679133002CA898 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -84,6 +92,7 @@
 				F949CF602FF3D1D900563A00 /* ModularProgrammingApp.swift */,
 				F949CF612FF3D1D900563A00 /* LaunchScreen.storyboard */,
 				4C71CF432FFFBC2C00296567 /* TestPlan.xctestplan */,
+				4CA50B7930024E4A0069FA9C /* XCConfigs */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -131,6 +140,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				4CA50B7930024E4A0069FA9C /* XCConfigs */,
 			);
 			name = "SPM-Modular-Programming";
 			packageProductDependencies = (
@@ -325,6 +337,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -396,6 +409,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;

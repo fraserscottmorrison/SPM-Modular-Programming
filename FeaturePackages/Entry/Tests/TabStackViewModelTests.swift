@@ -1,3 +1,5 @@
+// Authored by Fraser Scott-Morrison
+
 import Testing
 import Tools
 @testable import Entry

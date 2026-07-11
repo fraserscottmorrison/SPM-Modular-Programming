@@ -1,3 +1,5 @@
+// Authored by Fraser Scott-Morrison
+
 import XCTest
 @testable import Detail
 import SwiftUI
@@ -8,7 +10,7 @@ import Tools
 final class DetailViewTests: XCTestCase {
 
     func testDetailViewCanBeCreated() {
-        let view = DetailView(router: PreviewRouter<DetailRoute>().routerBinding, title: "Preview")
+        let view = DetailView(router: PreviewRouter<DetailRoute>().routerBinding, index: 0)
 
         XCTAssertNotNil(view)
     }

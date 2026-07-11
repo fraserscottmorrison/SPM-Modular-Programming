@@ -1,3 +1,5 @@
+// Authored by Fraser Scott-Morrison
+
 import SwiftUI
 import Tools
 
@@ -5,8 +7,8 @@ extension DetailCoordinator {
 
     @ViewBuilder private func navigateTo(route: DetailRoute, path: Binding<NavigationPath>) -> some View {
         switch route {
-        case .initialRoute(let title):
-            DetailView(router: $router, title: title)
+        case .initialRoute(let index):
+            DetailView(router: $router, index: index)
         }
     }
 }

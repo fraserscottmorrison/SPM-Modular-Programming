@@ -1,3 +1,5 @@
+// Authored by Fraser Scott-Morrison
+
 import SwiftUI
 
 /// Defines how a route should be presented.

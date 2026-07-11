@@ -1,3 +1,5 @@
+// Authored by Fraser Scott-Morrison
+
 import SwiftUI
 
 /// Supplies in-memory router bindings for previews and tests.

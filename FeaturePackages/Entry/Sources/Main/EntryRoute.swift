@@ -1,3 +1,5 @@
+// Authored by Fraser Scott-Morrison
+
 import Tools
 
 /// Represents the navigation destinations in the Entry module.

@@ -1,5 +1,8 @@
 // swift-tools-version:6.2
 import PackageDescription
+import Foundation
+
+let isDebug = ProcessInfo.processInfo.environment["IS_DEBUG"] != "true"
 
 let package = Package(
     name: "Detail",
@@ -13,13 +16,25 @@ let package = Package(
             targets: ["Detail"]
         )
     ],
+    traits: [
+        .trait(name: "DEBUG", description: "Is Debug Build"), .default(enabledTraits: (isDebug ? ["DEBUG"] : []))
+    ],
     dependencies: [
         .package(path: "../Tools")
     ],
     targets: [
         .target(
+            name: "DetailMocks",
+            dependencies: [],
+            path: "Sources/Mocks",
+            resources: [.process("Responses")]
+        ),
+        .target(
             name: "DetailConcurrent",
-            dependencies: ["Tools"],
+            dependencies: [
+                "Tools",
+                .targetItem(name: "DetailMocks", condition: .when(traits: ["DEBUG"]))
+            ],
             path: "Sources/Concurrent"
         ),
         .target(

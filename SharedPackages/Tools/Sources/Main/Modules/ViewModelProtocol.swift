@@ -1,3 +1,5 @@
+// Authored by Fraser Scott-Morrison
+
 /// Defines the base action and state contract for view models.
 @MainActor public protocol ViewModelProtocol {
     associatedtype VS

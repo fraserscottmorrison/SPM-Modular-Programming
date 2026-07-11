@@ -1,13 +1,16 @@
+// Authored by Fraser Scott-Morrison
+
 import Tools
 import SwiftUI
+import DetailConcurrent
 
 /// Represents the navigation destinations in the Detail module.
 public enum DetailRoute: RawRepresentable, Route {
 
-    case initialRoute(String)
+    case initialRoute(Int)
 
     public init?(rawValue: String) {
-        self = .initialRoute("")
+        self = .initialRoute(0)
     }
 
     public var rawValue: String {

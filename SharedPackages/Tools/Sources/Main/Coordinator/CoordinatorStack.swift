@@ -1,3 +1,5 @@
+// Authored by Fraser Scott-Morrison
+
 import SwiftUI
 
 /// Owns a navigation path and optionally wraps content in NavigationStack.

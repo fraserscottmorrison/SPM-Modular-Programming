@@ -1,6 +1,9 @@
+// Authored by Fraser Scott-Morrison
+
 import SwiftUI
 import Tools
 import Detail
+import DetailConcurrent
 
 /// Displays tab items and their independent navigation stacks.
 public struct TabStack: View {
@@ -111,7 +114,7 @@ public struct TabStack: View {
 
     @ViewBuilder private func navigationStackLayout(for tab: ViewModel.Tab, index: Int) -> some View {
         NavigationStack(path: getPath(index: index)) {
-            DetailCoordinator(path: getPath(index: index), initialRoute: .initialRoute(tab.rawValue))
+            DetailCoordinator(path: getPath(index: index), initialRoute: .initialRoute(index))
                 .id(refreshIds[index] ?? "\(index)")
         }
         .ignoresSafeArea()

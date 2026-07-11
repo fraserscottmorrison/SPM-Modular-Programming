@@ -1,3 +1,5 @@
+// Authored by Fraser Scott-Morrison
+
 import Foundation
 import Observation
 import Tools

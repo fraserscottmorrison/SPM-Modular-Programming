@@ -1,3 +1,5 @@
+// Authored by Fraser Scott-Morrison
+
 import SwiftUI
 
 /// Renders routes through push and modal navigation presentations.
@@ -20,7 +22,7 @@ public struct CoordinatorView<R, V>: View where R: Route, V: View {
                 self.navigateTo(route: initialRoute)
                     .sheet(item: $router.semiFormSheet, onDismiss: {
                         router.semiFormSheet = nil
-                    }, content: navigateTo)
+                    }, content: navigateToSemiFormSheet)
                     .sheet(item: $router.formSheet, onDismiss: {
                         router.formSheet = nil
                     }, content: navigateToFormSheet)
@@ -34,6 +36,10 @@ public struct CoordinatorView<R, V>: View where R: Route, V: View {
 
     @ViewBuilder private func navigateTo(route: R) -> some View {
         viewByRoute(route, router.$path)
+    }
+    
+    @ViewBuilder private func navigateToSemiFormSheet(route: R) -> some View {
+        viewByRoute(route, router.$path).presentationDetents([.medium, .large])
     }
 
     @ViewBuilder private func navigateToFormSheet(route: R) -> some View {
