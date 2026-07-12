@@ -1,23 +1,27 @@
+// Authored by Fraser Scott-Morrison
+
 import SwiftUI
 import Tools
+import ___VARIABLE_module___Concurrent
 
+/// Displays a routed detail screen for the provided title.
 public struct ___VARIABLE_viewName___: View {
 
-    @StateObject internal var viewModel: ViewModel
+    @State internal var viewModel: ViewModel
 
     public init(router: Binding<Router<___VARIABLE_module___Route>>) {
-        _viewModel = StateObject(wrappedValue: ViewModel(router: router))
+        _viewModel = State(initialValue: ViewModel(router: router))
     }
 
     public var body: some View {
-        VStack {
+        Group {
             switch viewModel.state {
             case .loaded:
-                EmptyView()
+                Text("")
             case .loading:
                 ProgressView()
             default:
-                EmptyView()
+                ProgressView()
             }
         }
         .onAppear {

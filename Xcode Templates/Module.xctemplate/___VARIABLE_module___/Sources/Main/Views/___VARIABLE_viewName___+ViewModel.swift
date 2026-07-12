@@ -1,24 +1,31 @@
+// Authored by Fraser Scott-Morrison
+
 import Foundation
+import Observation
 import Tools
 import SwiftUI
+import ___VARIABLE_module___Concurrent
 
 extension ___VARIABLE_viewName___ {
+    /// Manages ___VARIABLE_viewName___ state, title data, and routed actions.
+    @MainActor @Observable final class ViewModel: VMProtocol {
 
-    @MainActor final class ViewModel: VMProtocol, ObservableObject {
-
+        @ObservationIgnored
         @Binding var router: Router<___VARIABLE_module___Route>
-        @Published var state: ViewState = .idle
+        var state: ViewState = .loading
 
         init(router: Binding<Router<___VARIABLE_module___Route>>) {
             _router = router
         }
 
+        /// Represents the loading lifecycle for ___VARIABLE_viewName___.
         enum ViewState: ViewStateProtocol {
             case idle
             case loading
             case loaded
         }
 
+        /// Defines user and lifecycle actions handled by ___VARIABLE_viewName___.
         enum ViewAction {
             case onAppear
         }
@@ -26,7 +33,7 @@ extension ___VARIABLE_viewName___ {
         func handle(action: ViewAction) async {
             switch action {
             case .onAppear:
-                state = .loaded
+                self.state = .loaded
             }
         }
     }

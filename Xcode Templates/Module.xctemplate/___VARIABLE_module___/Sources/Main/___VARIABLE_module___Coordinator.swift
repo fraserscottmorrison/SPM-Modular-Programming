@@ -1,3 +1,5 @@
+// Authored by Fraser Scott-Morrison
+
 import SwiftUI
 import Tools
 
@@ -11,13 +13,14 @@ extension ___VARIABLE_module___Coordinator {
     }
 }
 
+/// Coordinates navigation for the ___VARIABLE_module___ module.
 public struct ___VARIABLE_module___Coordinator: View {
 
     @State internal var router: Router<___VARIABLE_module___Route>
     var initialRoute: ___VARIABLE_module___Route
 
     public init(path: Binding<NavigationPath>,
-                initialRoute: ___VARIABLE_module___Route = .initialRoute) {
+                initialRoute: ___VARIABLE_module___Route) {
         _router = State(wrappedValue: Router(path: path))
         self.initialRoute = initialRoute
     }
