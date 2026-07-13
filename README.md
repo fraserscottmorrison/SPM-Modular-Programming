@@ -70,6 +70,7 @@ As your project grows the harness must be maintained and optimised to remain eff
 
 ## Limitations
 Every architecture has its strengths and weaknesses. If an author isn't clear about both, they either aren't being honest or they don't understand the architecture deeply enough.
+- For a small project this can be overkill. But the reference app is a great starting point to get going quickly
 - If your app includes a widget extension, most of the code can live in a package. However, certain classes must remain in the main project, such as `Widget`, `WidgetBundle`, `WidgetConfigurationIntent`, `AppIntentTimelineProvider`, and related types.
 - As mentioned above, `NavigationStack`s must be configured in a specific way to support inter-package routing. The reference project demonstrates this approach.
 - Packages without assets do not generate a bundle. I prefer every package to expose a consistent bundle interface, so I add a dummy asset as a workaround.
