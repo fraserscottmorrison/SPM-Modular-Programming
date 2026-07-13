@@ -5,23 +5,28 @@ import Tools
 @testable import Detail
 
 /// Verifies DetailView.ViewModel state transitions.
+@MainActor
 struct TabStackViewModelTests {
 
-    @Test func testInitialStateIsLoaded() async throws {
-        let viewModel = await makeViewModel()
+    @Test func testInitialStateIsLoading() async throws {
+        let viewModel = makeViewModel()
         
-        #expect(await viewModel.state == .loaded)
+        #expect(viewModel.state == .loading)
     }
     
     @Test func testOnAppearSetsLoadedState() async throws {
-        let viewModel = await makeViewModel()
+        let viewModel = makeViewModel()
         
         await viewModel.handle(action: .onAppear)
         
-        #expect(await viewModel.state == .loaded)
+        if case .loaded(let details) = viewModel.state {
+            #expect(details.name == "Kylian Mbappe")
+        } else {
+            Issue.record("Expected loaded state")
+        }
     }
     
-    private func makeViewModel() async  -> DetailView.ViewModel {
-        await DetailView.ViewModel(router: PreviewRouter<DetailRoute>().routerBinding, title: "Preview")
+    private func makeViewModel() -> DetailView.ViewModel {
+        DetailView.ViewModel(router: PreviewRouter<DetailRoute>().routerBinding, index: 0)
     }
 }

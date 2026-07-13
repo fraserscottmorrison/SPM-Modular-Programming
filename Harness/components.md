@@ -3,6 +3,7 @@
 ## When To Load
 
 - Use this compatibility entrypoint when an older instruction points to `Harness/components.md`.
+- Use for reusable SwiftUI helper, wrapper, modifier, preview-helper, or shared UI utility work.
 
 ## Guidance
 

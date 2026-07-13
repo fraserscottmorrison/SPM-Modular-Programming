@@ -5,10 +5,10 @@ import Tools
 
 extension DetailCoordinator {
 
-    @ViewBuilder private func navigateTo(route: DetailRoute, path: Binding<NavigationPath>) -> some View {
+    @ViewBuilder private func navigateTo(route: DetailRoute, router: Binding<Router<DetailRoute>>) -> some View {
         switch route {
         case .initialRoute(let index):
-            DetailView(router: $router, index: index)
+            DetailView(router: router, index: index)
         }
     }
 }

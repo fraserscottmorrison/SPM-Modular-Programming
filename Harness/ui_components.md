@@ -2,74 +2,53 @@
 
 ## Goal
 
-Help agents discover existing shared UI helpers before creating new components or modifiers.
+Help agents discover existing shared SwiftUI helpers before creating new components, wrappers, or modifiers.
 
 ## When To Load
 
 - Adding reusable SwiftUI views, modifiers, wrappers, preview helpers, or UI utilities.
-- Deciding whether a component belongs in `Tools` or a feature package.
+- Deciding whether code belongs in `SharedPackages/Tools` or a feature package.
 
-## Applicability Evidence
-
-- `Tools` exposes coordinator wrapper views and preview routing helpers.
-- `String+Color.swift` provides a reusable `String.toHashColor()` extension used by `DetailView`.
-- No live `Components` package exists, although older scaffolding may still imply one.
-
-## Guidance
-
-### component_index_entries
+## Live Shared Helpers
 
 | Component or helper | Path | Use |
 | --- | --- | --- |
-| `CoordinatorStack` | `Packages/Tools/Sources/Coordinator/CoordinatorStack.swift` | Owns a `NavigationPath` and optionally wraps content in `NavigationStack`. |
-| `CoordinatorView` | `Packages/Tools/Sources/Coordinator/CoordinatorView.swift` | Renders an initial route and attaches push/sheet/full-screen destinations. |
-| `CoordinatorBase` | `Packages/Tools/Sources/Coordinator/CoordinatorBase.swift` | Internal wrapper for coordinator content and router state. |
-| `PreviewRouter` | `Packages/Tools/Sources/Coordinator/PreviewRouter.swift` | Supplies in-memory router bindings for previews and tests. |
-| `String.toHashColor()` | `Packages/Tools/Sources/General/String+Color.swift` | Creates deterministic colors from strings for placeholder/detail screens. |
-| `WordGenerator.next()` | `Packages/Tools/Sources/General/WordGenerator.swift` | Generates sample titles for navigation demos. |
+| `CoordinatorStack` | `SharedPackages/Tools/Sources/Main/Coordinator/CoordinatorStack.swift` | Owns a `NavigationPath` and optionally wraps content in `NavigationStack`. |
+| `CoordinatorView` | `SharedPackages/Tools/Sources/Main/Coordinator/CoordinatorView.swift` | Renders an initial route and attaches push/sheet/full-screen destinations. |
+| `CoordinatorBase` | `SharedPackages/Tools/Sources/Main/Coordinator/CoordinatorBase.swift` | Observes router state while rendering coordinator content. |
+| `PreviewRouter` | `SharedPackages/Tools/Sources/Main/Coordinator/PreviewRouter.swift` | Supplies in-memory router bindings for previews and tests. |
+| `Router` and `Route` | `SharedPackages/Tools/Sources/Main/Coordinator/Router.swift` | Shared route-driven navigation state and route identity. |
+| `String.toHashColor()` | `SharedPackages/Tools/Sources/Main/Foundation/String+Color.swift` | Creates deterministic colors from strings for placeholder/detail screens. |
+| `ViewModelProtocol` / `FormProtocol` | `SharedPackages/Tools/Sources/Main/Modules/ViewModelProtocol.swift` | Shared action/state/form contracts for ViewModels. |
 
-### view_modifier_index
+## Component Placement
 
-- No custom `ViewModifier` types were found in live source.
-- Reusable view behavior is currently expressed as wrapper views or extensions.
+- Put cross-package, domain-neutral infrastructure in `SharedPackages/Tools`.
+- Keep feature-specific UI in the owning feature package until another package genuinely needs it.
+- Add public access only for APIs consumed outside their defining package.
+- There is no live `Components` package; do not create one without explicit project direction.
 
-### component_accessibility_contracts
+## Accessibility
 
-- No shared accessibility identifier or label convention is present in live components.
-- Add accessibility labels and identifiers at the component level when creating reusable controls that tests or users depend on.
+- No shared accessibility identifier convention exists yet.
+- Add accessibility labels/identifiers at the component level when creating reusable controls that tests or users depend on.
+- UI tests should not rely on unstable visible labels unless labels are the product contract.
 
 ## Accuracy Contracts
 
 ### Do
 
-- Put cross-package reusable SwiftUI infrastructure in `Tools` only when it is domain-neutral.
-- Keep feature-specific UI in the owning feature package until reuse is real.
-- Prefer extending the current helper surface over creating a missing `Components` package without confirmation.
+- Search existing Swift helpers before adding new shared code.
+- Extend `Tools` only when the helper is reusable and package-neutral.
+- Add tests for non-trivial shared behavior.
 
 ### Do Not
 
-- Do not reference `Packages/Components` as live source; it is absent.
-- Do not duplicate router wrapper views inside feature packages.
+- Do not duplicate router/coordinator wrappers inside feature packages.
 - Do not add brand-specific controls to `Tools` unless `Tools` is explicitly made responsible for shared UI primitives.
-
-### Expected Output Shape
-
-- Shared helper: source file under `Packages/Tools/Sources/<Area>/`, public API only when used cross-package, and package tests for behavior.
-- Feature-only component: keep next to the feature views and promote later if another package uses it.
-
-## Existing Harness Sources Used
-
-| Source | Evidence Used |
-| --- | --- |
-| `Packages/Tools/Sources/Coordinator/*.swift` | Reusable coordinator UI wrappers. |
-| `Packages/Tools/Sources/General/String+Color.swift` | Reusable display helper. |
-
-## Needs Project Confirmation
-
-- Whether to restore a dedicated `Components` package for shared UI primitives.
-- Accessibility identifier naming for reusable components.
+- Do not reference stale helper names that are not present in live source.
 
 ## Verification
 
-- Search `Packages/**/*.swift` for an existing helper before adding a new one.
-- Build all packages that import the changed helper.
+- Build all packages that import a changed shared helper.
+- Run focused tests for utility behavior when available.

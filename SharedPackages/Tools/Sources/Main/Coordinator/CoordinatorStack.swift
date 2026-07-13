@@ -3,6 +3,7 @@
 import SwiftUI
 
 /// Owns a navigation path and optionally wraps content in NavigationStack.
+@MainActor
 public struct CoordinatorStack<Content: View>: View {
 
     @State private var path = NavigationPath()

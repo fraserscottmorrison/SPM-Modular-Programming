@@ -8,72 +8,67 @@ Guide agents toward the current package and Xcode testing surfaces.
 
 - Adding or changing tests.
 - Changing ViewModel behavior, route handling, shared utilities, package manifests, or build validation.
-- Investigating why `swift test` fails for iOS-only packages.
+- Investigating why a package or platform build fails.
 
-## Applicability Evidence
+## Live Test Surface
 
-- `Packages/Detail/Tests/View/DetailViewTests.swift` and `Packages/Detail/Tests/ViewModel/DetailViewModelTests.swift` use XCTest.
-- `Packages/Entry/Tests/TabStackViewModelTests.swift` uses XCTest.
-- `Packages/Tools/Tests/ToolsTests.swift` uses Swift Testing.
-- Xcode project declares `SPM-Modular-ProgrammingTests` and `SPM-Modular-ProgrammingUITests` targets.
+| Package or target | Current tests | Framework |
+| --- | --- | --- |
+| `FeaturePackages/Detail` | View construction and ViewModel state tests | XCTest for view construction; Swift Testing for ViewModel tests. |
+| `FeaturePackages/Entry` | `TabStack.ViewModel` tests | Swift Testing. |
+| `SharedPackages/Tools` | Smoke test | Swift Testing. |
+| Xcode app project | `FuturamaInvadersNewTests`, `FuturamaInvadersNewUITests` targets | Present in project; no strong live pattern in source. |
 
-## Guidance
+## Unit Test Patterns
 
-### unit_test_patterns
-
-- Match the package's existing test framework unless deliberately migrating it.
-- Detail and Entry tests use XCTest with `@MainActor` on UI/ViewModel test classes.
-- Tools currently has a Swift Testing smoke test; add behavior tests there for non-UI utility logic.
+- Match the package's existing test framework for nearby tests unless deliberately migrating that package.
+- Use `@MainActor` for tests that construct SwiftUI views, routers, or ViewModels.
 - Use `PreviewRouter` to construct router bindings in view and ViewModel tests.
+- Test initial ViewModel state and affected `handle(action:)` transitions when behavior changes.
+- Add behavior tests in `SharedPackages/Tools/Tests` for non-trivial shared utility or router logic.
 
-### ui_test_patterns
+## UI Test Patterns
 
-- Xcode UI test targets exist, but no live UI test files or robot/page-object pattern were found.
-- Do not invent a robot pattern without project confirmation.
-- Add accessibility identifiers to reusable controls before relying on them in UI tests.
+- Xcode UI test targets exist, but there is no established robot/page-object pattern.
+- Add accessibility identifiers before writing UI tests that need stable selectors.
+- Do not rely on labels that are likely to change unless the label text is the product contract.
 
-### test_plan_structure
+## Build Validation
 
-- No standalone test plans were found.
-- Use live tests and current user requirements as requirements evidence; no generated planning documents are present.
+- Use `env -u IS_RELEASE` for local debug builds so mock trait targets remain enabled.
+- `swift build` from package directories is useful for manifest and macOS-host package smoke checks.
+- Use Xcode scheme builds for app targets and platform-specific SwiftUI availability.
+- visionOS, tvOS, and watchOS validation requires the corresponding Xcode platform component.
 
 ## Accuracy Contracts
 
 ### Do
 
 - Add ViewModel tests when changing state transitions or action handling.
-- Keep tests deterministic; avoid persisting shared state without cleanup.
-- Use `@MainActor` for SwiftUI/ViewModel tests that construct main-actor types.
-- Prefer Xcode scheme tests for iOS-only SwiftUI packages.
+- Keep tests deterministic and isolated.
+- Clean up persistent state if a test introduces storage.
+- Run the narrowest owning package or scheme validation after edits.
 
 ### Do Not
 
-- Do not rely on plain `swift test` as proof of success for the current iOS-only package manifests on macOS.
-- Do not add mocks or fixtures under `.agents/skills/...`; those belong to the optimiser skill's own tests, not the app.
-- Do not add UI tests that depend on labels without stable accessibility identifiers when labels may change.
+- Do not claim an uninstalled platform component is a source failure.
+- Do not add mocks or fixtures outside the owning package's `Sources/Mocks` or test fixture area.
+- Do not add UI tests without stable selectors for controls they need to find repeatedly.
 
-### Expected Output Shape
+## Expected Output Shape
 
 - ViewModel behavior change: test initial state and affected `handle(action:)` transition.
-- Route/coordinator change: test construction where possible and manually verify navigation if executable UI tests are absent.
-- Utility change: add focused package tests in `Packages/Tools/Tests`.
+- Route/coordinator change: test route construction where possible and validate app/package build.
+- Utility change: focused tests in `SharedPackages/Tools/Tests`.
+- Platform/config change: `xcodebuild -list` plus the affected app/package build command.
 
-## Existing Harness Sources Used
+## Verification Commands
 
-| Source | Evidence Used |
-| --- | --- |
-| `Packages/Detail/Tests/` | XCTest view and ViewModel patterns. |
-| `Packages/Entry/Tests/` | XCTest ViewModel pattern. |
-| `Packages/Tools/Tests/ToolsTests.swift` | Swift Testing presence. |
-| `SPM-Modular-Programming.xcodeproj/project.pbxproj` | App unit/UI test target presence. |
+```sh
+cd SharedPackages/Tools && env -u IS_RELEASE swift test
+cd FeaturePackages/Detail && env -u IS_RELEASE swift test
+cd FeaturePackages/Entry && env -u IS_RELEASE swift test
+xcodebuild -list -project FuturamaInvadersNew.xcodeproj
+```
 
-## Needs Project Confirmation
-
-- Whether to standardise on XCTest or Swift Testing across packages.
-- Preferred iOS simulator destination for scheme tests.
-- Whether UI tests should use a page-object or robot pattern.
-
-## Verification
-
-- Run the narrow owning scheme when available, such as `EntryUnitTests` or `DetailUnitTests`.
-- Use editor diagnostics when an executable iOS test destination is unavailable.
+Use app build commands from [Harness/platform_configuration.md](../platform_configuration.md) when app targets or Xcode settings change.

@@ -1,5 +1,6 @@
 {
     "name": "Erling Haaland",
     "description": "Haaland's favourite meal is kebab pizza, a standard thin crust pizza base, tomato sauce and mozzarella cheese combined with Turkish kebab ingredients such as sliced donor kebab meat, onions, lettuce, and sauces",
-    "colorString": "#BA0C2F"
+    "colorString": "#BA0C2F",
+    "isColorInverted": false
 }

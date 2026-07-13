@@ -3,9 +3,10 @@
 import SwiftUI
 
 /// Wraps coordinator content with its current router state.
+@MainActor
 internal struct CoordinatorBase<Content: View, R>: View where R: Route {
 
-    var state: Router<R>
+    @ObservedObject var state: Router<R>
 
     let bodyContent: () -> Content
 

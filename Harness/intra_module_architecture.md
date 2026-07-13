@@ -2,90 +2,108 @@
 
 ## Goal
 
-Document the screen, ViewModel, route, and state patterns used inside live Swift packages.
+Document the screen, ViewModel, route, state, resource, and service patterns used inside live Swift packages.
 
 ## When To Load
 
-- Adding or changing SwiftUI views, nested ViewModels, route enums, package entrypoints, or state/action enums.
+- Adding or changing SwiftUI views, nested ViewModels, route enums, package entrypoints, services, models, or state/action enums.
 - Updating Xcode view/module templates.
-- Deciding where UI state or async action handling belongs.
+- Deciding where UI state, async action handling, or feature-local helpers belong.
 
-## Applicability Evidence
+## Live Patterns
 
-- `DetailView` and `TabStack` are SwiftUI views with nested ViewModels in `+ViewModel.swift` files.
-- ViewModels conform to `VMProtocol` through `ViewModelProtocol & StateProtocol` in `Tools`.
-- `DetailView.ViewModel` and `TabStack.ViewModel` define nested `ViewState` and `ViewAction` enums.
-- Current live ViewModels use `@MainActor final class`, `ObservableObject`, and `@Published` state.
+- Views live under `FeaturePackages/<Package>/Sources/Main/Views/`.
+- ViewModel logic lives beside the view in `<View>+ViewModel.swift`.
+- ViewModels are nested in an extension on the view type.
+- Current ViewModels use Swift Observation: `@MainActor @Observable final class ViewModel: VMProtocol`.
+- Views store ViewModels with `@State internal var viewModel: ViewModel`.
+- Router bindings in ViewModels use `@ObservationIgnored @Binding var router: Router<Route>`.
+- Feature services and models live under `Sources/Concurrent` when separated from SwiftUI.
+- Package resources live under `Sources/Main/Resources` and must be declared in the owning target manifest.
 
-## Guidance
+## View Pattern
 
-### view_patterns_and_structure
+- Keep SwiftUI layout in the view file.
+- Initialize the nested ViewModel in the view initializer with `State(initialValue:)`.
+- Switch on `viewModel.state` for loading/loaded/empty rendering when the feature has lifecycle state.
+- Trigger lifecycle work with `viewModel.action(.onAppear)` from `.onAppear`.
+- Keep transient view-only state in the view when it does not belong in behavior tests.
+- Keep `#Preview` blocks when dependencies can be satisfied with `PreviewRouter`.
 
-- Place package screens under `Packages/<Package>/Sources/Main/Views/`.
-- Keep SwiftUI layout in the view file and ViewModel logic in `<View>+ViewModel.swift`.
-- Use `#Preview` for view files and `PreviewRouter` from `Tools` for router bindings.
-- Views may own their ViewModel with `@StateObject` in current live code.
+## ViewModel Pattern
 
-### view_model_patterns_and_structure
+Use the live template shape for new ViewModels:
 
-- Nest the ViewModel inside an extension on the view type.
-- Use `@MainActor final class ViewModel: VMProtocol, ObservableObject` for the current live pattern.
-- Expose `@Published var state` and route/tab state needed by the view.
-- Define nested `ViewState: ViewStateProtocol` with at least `.idle` and `.loading`; add `.loaded` where the view uses it.
-- Define nested `ViewAction` and implement `func handle(action:) async`.
+```swift
+extension SomeView {
+    @MainActor @Observable final class ViewModel: VMProtocol {
+        @ObservationIgnored
+        @Binding var router: Router<SomeRoute>
+        var state: ViewState = .loading
+
+        enum ViewState: ViewStateProtocol {
+            case idle
+            case loading
+            case loaded
+        }
+
+        enum ViewAction {
+            case onAppear
+        }
+
+        func handle(action: ViewAction) async { }
+    }
+}
+```
+
+- Define nested `ViewState` with at least `.idle` and `.loading`; add associated values only when the view renders them.
+- Define nested `ViewAction` for user and lifecycle events.
+- Keep navigation decisions in actions when the navigation is user-driven.
 - Use `action(_:)` from `ViewModelProtocol` to launch async handling on the main actor.
 
-### state_management_pattern
+## State Ownership
 
-- View rendering switches over `viewModel.state` where the view has loading or loaded branches.
-- Keep navigation path arrays and selected tab state in the owning ViewModel (`TabStack.ViewModel`).
-- Keep transient view-only state in the view (`@State private var refreshIds` in `TabStack`).
+- `TabStack.ViewModel` owns tab selection and one `NavigationPath` per tab.
+- `DetailView.ViewModel` owns the current details loading state and uses `DetailService` for data.
+- `Router` owns navigation presentation state; views should not duplicate router state locally.
+- The app shell owns no durable state beyond launching the root stack.
 
-### dependency_injection_pattern
+## Dependency And DI Pattern
 
-- Live package manifests do not declare `Factory`; however `Packages/Tools/Sources/Coordinator/.swift` imports `Factory` and references missing screen-history types.
-- Treat DI through `Factory` as unconfirmed until package dependencies and missing types are restored.
-- Prefer initializer injection and protocol boundaries for new code unless a confirmed DI container is added back.
+- There is no live DI container in package manifests.
+- Prefer initializer injection and small protocol boundaries for new services.
+- Do not add Factory, Resolver, environment singletons, or global stores unless the user explicitly asks for that architecture.
+- Keep storage, networking, and service implementations in the owning package until reuse across packages is proven.
 
-### form_patterns_and_field_validation
+## Forms
 
 - No live forms exist.
-- `FormProtocol` in `Tools` provides a submit/process contract if a form ViewModel is introduced.
+- `FormProtocol` in `SharedPackages/Tools/Sources/Main/Modules/ViewModelProtocol.swift` provides a submit/process contract if a form ViewModel is introduced.
+- Do not invent validation rules without a feature requirement.
 
 ## Accuracy Contracts
 
 ### Do
 
+- Use Swift Observation for new ViewModels unless the user asks for a migration back to `ObservableObject`.
 - Keep ViewModel state and actions adjacent to the view in `+ViewModel.swift`.
-- Keep reusable protocols in `Tools/Sources/Modules/`.
-- Add tests for ViewModel initial state and actions when changing ViewModel behavior.
+- Add or update tests when changing ViewModel behavior.
+- Keep public API only for cross-package entrypoints; prefer internal/default access for feature internals.
 
 ### Do Not
 
-- Use the Xcode templates as the starting point for new screens, then compare with the closest live package for feature-specific state and route parameters.
-- Do not introduce dedicated feature-package structure unless that package is restored in source.
-- Do not invent form validation rules without a feature spec or live form evidence.
+- Do not use `@StateObject`, `ObservableObject`, or `@Published` for new ViewModels unless you are preserving an existing older type.
+- Do not construct another module's private ViewModel directly; use its coordinator or public view entrypoint.
+- Do not add a feature package when a screen belongs inside an existing package.
 
-### Expected Output Shape
+## Expected Output Shape
 
-- New screen in an existing package: `Views/<Screen>.swift`, `Views/<Screen>+ViewModel.swift`, preview, ViewModel tests if behavior changes.
-- New ViewModel state: update nested `ViewState`, update view switch, and add tests for transitions.
-
-## Existing Harness Sources Used
-
-| Source | Evidence Used |
-| --- | --- |
-| `Packages/Detail/Sources/Main/Views/DetailView.swift` | View ownership and preview pattern. |
-| `Packages/Entry/Sources/Main/Views/TabStack+ViewModel.swift` | Tab state and nested ViewModel pattern. |
-| `Packages/Tools/Sources/Modules/ViewModelProtocol.swift` | Action/state protocol contract. |
-| `Xcode Templates/` | Current module and View/ViewModel scaffolds. |
-
-## Needs Project Confirmation
-
-- Whether the project should standardise on `ObservableObject` or Swift 6.2 `@Observable` for new ViewModels.
-- Whether `Factory` DI is intended to be restored.
+- New screen in an existing package: `Views/<Screen>.swift`, `Views/<Screen>+ViewModel.swift`, preview, route/coordinator case if navigable, and ViewModel tests if behavior changes.
+- New service/model: files under `Sources/Concurrent`, dependency from `Sources/Main` only when the UI layer consumes it, and tests where behavior is non-trivial.
+- New ViewModel state: update nested `ViewState`, update the view switch, and add tests for the transition.
 
 ## Verification
 
-- Run the package or scheme tests for the package touched.
-- Confirm every changed view still has a preview when it can be instantiated with `PreviewRouter`.
+- Run the owning package build or tests.
+- Confirm previews can instantiate with `PreviewRouter` where applicable.
+- Re-run app target builds when a public package API changes.

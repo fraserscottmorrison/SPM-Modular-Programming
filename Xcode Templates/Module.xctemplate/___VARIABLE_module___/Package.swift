@@ -2,13 +2,17 @@
 import PackageDescription
 import Foundation
 
-let isDebug = ProcessInfo.processInfo.environment["IS_DEBUG"] != "true"
+let isDebug = ProcessInfo.processInfo.environment["IS_RELEASE"] != "true"
 
 let package = Package(
     name: "___VARIABLE_module___",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v26)
+        .iOS(.v26),
+        .macOS(.v26),
+        .tvOS(.v26),
+        .watchOS(.v26),
+        .visionOS(.v26)
     ],
     products: [
         .library(
@@ -20,7 +24,7 @@ let package = Package(
         .trait(name: "DEBUG", description: "Is Debug Build"), .default(enabledTraits: (isDebug ? ["DEBUG"] : []))
     ],
     dependencies: [
-        .package(path: "../../../SharedPackages/Tools")
+        .package(path: "../../SharedPackages/Tools")
     ],
     targets: [
         .target(

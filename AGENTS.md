@@ -1,93 +1,76 @@
-# SPM-Modular-Programming - Agent Harness
+# FuturamaInvadersNew Agent Harness
 
-Swift 6.2 package workspace, SwiftUI app target, iOS 26 deployment surface.
+Swift 6.2 modular SwiftUI workspace with local Swift packages and separate native app targets for iOS, macOS, and visionOS.
 
 ## Harness Purpose
 
-This repository uses `Harness/` as the durable guidance library for agents. Load it before making project changes so edits follow the live package layout instead of stale generated plans.
+This repository uses `Harness/` as the durable guidance library for agents. Load this file first, then load only the focused harness document that matches the task. Live source is the authority when a harness file, template, or older chat summary disagrees with code.
 
-## Scope
+## Live Topology
 
-- Harness target: SPM-Modular-Programming repository root
-- Source root: repository root
-- Platform: iOS
-- Structure mode: preserve existing `Harness/` structure tracked by Git.
-
-## Source Evidence Summary
-
-- App entrypoint: `App/ModularProgrammingApp.swift` launches `EntryStack()`.
-- Live packages: `Packages/Tools`, `Packages/Detail`, and `Packages/Entry`.
-- Dependency direction: app target -> `Entry`; `Entry` -> `Detail` + `Tools`; `Detail` -> `Tools`; `Tools` has no declared package dependencies.
-- UI pattern: SwiftUI views with nested `@MainActor` ViewModels, route enums, coordinators, `Router`, and `NavigationStack`.
-- Assets: `App/Assets.xcassets` contains sprites, backgrounds, launch/app icons, and the accent color. Each package also has a minimal resource asset catalogue.
-- Tests: Swift Testing in `Tools`; XCTest in `Entry` and `Detail`; Xcode project has `SPM-Modular-ProgrammingTests` and `SPM-Modular-ProgrammingUITests` targets.
-- Existing prior art: root `AGENTS.md` and Xcode templates.
-- Inventory caveat: project inventory may include `.build` and `.agents/skills` artifacts; ignore Factory demo assets, optimiser test mocks, and i18next/MSW signals unless they appear in live app or package source.
+- App entrypoint: `App/ModularProgrammingApp.swift` imports `Entry` and launches `EntryStack()`.
+- Feature packages: `FeaturePackages/Entry` and `FeaturePackages/Detail`.
+- Shared package: `SharedPackages/Tools`.
+- Dependency direction: app targets -> `Entry`; `Entry` -> `Detail` + `Tools`; `Detail` -> `Tools`; `Tools` has no package dependencies.
+- Package platforms: iOS 26, macOS 26, tvOS 26, watchOS 26, and visionOS 26.
+- Xcode app targets: `FuturamaInvadersNew` for iOS-family builds, `FuturamaInvadersNew-macOS` for native macOS, and `FuturamaInvadersNew-visionOS` for native visionOS.
+- Current UI architecture: SwiftUI, route enums, coordinators, `Router`, `NavigationStack`, Swift Observation ViewModels, and package-owned resources.
 
 ## Load Order
 
-1. Read this file for the category map, source evidence summary, and unknowns.
-2. Load only the category docs whose `When To Load` guidance matches the task.
-3. Prefer live source files over templates or older generated artifacts when they conflict.
+1. Read this file for the task map and non-negotiable project facts.
+2. Load the smallest matching harness file from the category map.
+3. Read the live source files that own the behavior before editing.
+4. Prefer live package manifests, project settings, and templates over stale notes.
 
 ## Category Map
 
-| Category | Status | File | When To Load |
-| --- | --- | --- | --- |
-| `inter_module_architecture` | applicable | [Harness/inter_module_architecture.md](Harness/inter_module_architecture.md) | Package, target, dependency, module-boundary, or app-entry work. |
-| `intra_module_architecture` | applicable | [Harness/intra_module_architecture.md](Harness/intra_module_architecture.md) | Screen, ViewModel, state/action, DI, or file-structure work inside a package. |
-| `api_networking` | not-applicable | none | No live API, HTTP client, request model, or remote data-source evidence. |
-| `navigation_pattern` | applicable | [Harness/navigation_pattern.md](Harness/navigation_pattern.md) | Route enum, coordinator, router, tab, sheet, or `NavigationStack` work. |
-| `ui_components` | applicable | [Harness/ui_components.md](Harness/ui_components.md) | Shared SwiftUI utilities, preview router, modifiers, or reusable view work. |
-| `brand_assets` | applicable | [Harness/brand_assets.md](Harness/brand_assets.md) | Asset catalogue, image, color, typography, audio, or resource work. |
-| `coding_standards` | applicable | [Harness/coding_standards.md](Harness/coding_standards.md) | Naming, comments, concurrency annotations, previews, lint, or framework-choice work. |
-| `qa_testing` | applicable | [Harness/qa/qa_testing.md](Harness/qa/qa_testing.md) | Unit, view, ViewModel, package, or Xcode test work. |
-| `mocks` | not-applicable | none | No live project mock directory or mock framework evidence. Ignore mocks inside `.agents/skills/.../tests/`. |
-| `prompts` | needs-confirmation | none | Packages set `defaultLocalization`, but no live localisation or prompt files were found. |
-| `user_permissions` | not-applicable | none | No permission APIs or privacy declaration evidence found. |
-| `feature_enablement_flags` | not-applicable | none | No build-time or runtime feature flag system found. |
-| `data_storage` | needs-confirmation | [Harness/data_storage.md](Harness/data_storage.md) | Persistence work, especially high score storage not present in live source. |
-| `platform_configuration` | applicable | [Harness/platform_configuration.md](Harness/platform_configuration.md) | Xcode project, schemes, SPM manifests, templates, deployment target, or resource bundling work. |
+| Category | File | When To Load |
+| --- | --- | --- |
+| Inter-module architecture | [Harness/inter_module_architecture.md](Harness/inter_module_architecture.md) | Package, dependency, target, module-boundary, or app-entry work. |
+| Intra-module architecture | [Harness/intra_module_architecture.md](Harness/intra_module_architecture.md) | SwiftUI screen, ViewModel, state/action, file-structure, or module-internal work. |
+| Navigation pattern | [Harness/navigation_pattern.md](Harness/navigation_pattern.md) | Route enum, coordinator, router, tab, sheet, full-screen, or `NavigationStack` work. |
+| UI components | [Harness/ui_components.md](Harness/ui_components.md) | Shared SwiftUI wrappers, modifiers, preview helpers, or reusable UI utilities. |
+| Brand/assets | [Harness/brand_assets.md](Harness/brand_assets.md) | Asset catalogues, app icons, launch assets, colors, typography, audio, or package resources. |
+| Coding standards | [Harness/coding_standards.md](Harness/coding_standards.md) | Swift style, naming, comments, Observation, access control, previews, lint, or logging. |
+| Platform configuration | [Harness/platform_configuration.md](Harness/platform_configuration.md) | Xcode project, schemes, SPM manifests, deployment targets, templates, or resource bundling. |
+| QA/testing | [Harness/qa/qa_testing.md](Harness/qa/qa_testing.md) | Unit tests, view tests, ViewModel tests, package tests, or build validation. |
+| Data storage | [Harness/data_storage.md](Harness/data_storage.md) | Persistence, caching, high scores, file storage, UserDefaults, SwiftData, or migrations. |
+
+Compatibility entrypoints exist for older references: [Harness/components.md](Harness/components.md), [Harness/concurrency.md](Harness/concurrency.md), [Harness/coordinator-routing.md](Harness/coordinator-routing.md), [Harness/mvvm.md](Harness/mvvm.md), [Harness/package-based-development.md](Harness/package-based-development.md), and [Harness/standards.md](Harness/standards.md). Keep real rules in the owner files above.
 
 ## Task Dispatch
 
 | Task | Load |
 | --- | --- |
-| Add or change an SPM package, target, or dependency | [Harness/inter_module_architecture.md](Harness/inter_module_architecture.md) + [Harness/platform_configuration.md](Harness/platform_configuration.md) |
+| Add or change an SPM package, product, target, or dependency | [Harness/inter_module_architecture.md](Harness/inter_module_architecture.md) + [Harness/platform_configuration.md](Harness/platform_configuration.md) |
 | Add or modify a SwiftUI screen or ViewModel | [Harness/intra_module_architecture.md](Harness/intra_module_architecture.md) + [Harness/coding_standards.md](Harness/coding_standards.md) |
-| Add or change routes, coordinators, tabs, sheets, or navigation stacks | [Harness/navigation_pattern.md](Harness/navigation_pattern.md) |
-| Use or extend shared views, modifiers, or utilities | [Harness/ui_components.md](Harness/ui_components.md) |
-| Add or change asset catalogues, colors, images, typography, audio resources, or generated asset symbols | [Harness/brand_assets.md](Harness/brand_assets.md) |
-| Add or change local persistence | [Harness/data_storage.md](Harness/data_storage.md) |
+| Change routes, coordinators, tabs, sheets, or navigation stacks | [Harness/navigation_pattern.md](Harness/navigation_pattern.md) |
+| Use or extend shared SwiftUI infrastructure | [Harness/ui_components.md](Harness/ui_components.md) |
+| Change assets, app icons, package resources, or launch surfaces | [Harness/brand_assets.md](Harness/brand_assets.md) + [Harness/platform_configuration.md](Harness/platform_configuration.md) |
+| Change package platforms, Xcode targets, schemes, or templates | [Harness/platform_configuration.md](Harness/platform_configuration.md) + [Harness/inter_module_architecture.md](Harness/inter_module_architecture.md) |
 | Add or change tests | [Harness/qa/qa_testing.md](Harness/qa/qa_testing.md) |
-| Change build settings, schemes, templates, deployment targets, or resources | [Harness/platform_configuration.md](Harness/platform_configuration.md) |
+| Add persistence | [Harness/data_storage.md](Harness/data_storage.md) |
 | Task not matched above | [Harness/coding_standards.md](Harness/coding_standards.md) + this file |
 
-## Existing Documentation Incorporated
+## Current Validation Commands
 
-| Source | Used In | Notes |
-| --- | --- | --- |
-| `AGENTS.md` | all generated docs | Root index, load-order rules, and category dispatch. |
-| `Xcode Templates/` | `inter_module_architecture`, `intra_module_architecture`, `platform_configuration` | Aligned with the current `Tools`-only module and `ObservableObject` ViewModel patterns. |
-| Live Swift package files | all generated docs | Primary source of truth. |
+- Project list: `xcodebuild -list -project FuturamaInvadersNew.xcodeproj`
+- iOS app: `env -u IS_RELEASE xcodebuild build -project FuturamaInvadersNew.xcodeproj -scheme SPM-Modular-Programming -destination 'generic/platform=iOS Simulator'`
+- Native macOS app: `env -u IS_RELEASE xcodebuild build -project FuturamaInvadersNew.xcodeproj -scheme FuturamaInvadersNew-macOS -destination 'platform=macOS'`
+- Native visionOS app: `env -u IS_RELEASE xcodebuild build -project FuturamaInvadersNew.xcodeproj -scheme FuturamaInvadersNew-visionOS -destination 'generic/platform=visionOS'` after installing the visionOS platform component in Xcode.
+- Local package smoke build: run `env -u IS_RELEASE swift build` inside `SharedPackages/Tools`, `FeaturePackages/Detail`, or `FeaturePackages/Entry`.
 
 ## Unknowns And Assumptions
 
-- Needs project confirmation: whether deleted or absent feature and `Components` packages should be restored or ignored.
-- Needs project confirmation: whether `Factory` DI and the missing screen-history service should be restored or removed from live `Tools` source.
-- Needs project confirmation: the intended local persistence implementation for high scores; live source has none.
-- Needs project confirmation: preferred CI/build command and simulator destination.
-
-## Drift Controls
-
-- Module ownership and dependency direction live in [Harness/inter_module_architecture.md](Harness/inter_module_architecture.md).
-- Screen/ViewModel structure lives in [Harness/intra_module_architecture.md](Harness/intra_module_architecture.md).
-- Router and presentation rules live in [Harness/navigation_pattern.md](Harness/navigation_pattern.md).
-- Build commands, package manifests, and template caveats live in [Harness/platform_configuration.md](Harness/platform_configuration.md).
-- Testing rules live only in [Harness/qa/qa_testing.md](Harness/qa/qa_testing.md).
+- The app has no implemented persistence layer. Treat high scores, caches, SwiftData, UserDefaults, and migrations as unconfirmed until source or a user request defines them.
+- There is no live dedicated `Components` package. Use `SharedPackages/Tools` for domain-neutral shared infrastructure only.
+- There is no live DI container, logger, feature flag system, permission flow, or remote API client beyond mock/data-store scaffolding in `ToolsConcurrent`.
+- tvOS, watchOS, and visionOS platform builds require the matching Xcode platform components to be installed locally.
 
 ## Rules
 
-- Treat `Needs project confirmation` sections as blockers for automated edits that depend on the unknown.
-- Do not infer missing modules, scripts, prompts, flags, storage rules, or permission flows from generic Swift or iOS practice.
-- Do not write secrets, credentials, tokens, or private user data into source, tests, docs, or generated harness files.
+- Keep package dependencies flowing toward `Tools`; never introduce cycles.
+- Keep native macOS and native visionOS as separate app targets; do not turn the iOS target into Catalyst or “Designed for iPad on Mac” unless explicitly requested.
+- Do not add secrets, credentials, tokens, or private user data to source, tests, docs, or generated harness files.
+- Do not edit Xcode user data unless the task explicitly concerns user scheme state or Xcode UI state.

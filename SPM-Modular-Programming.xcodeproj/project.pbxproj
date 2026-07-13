@@ -11,6 +11,12 @@
 		F940F2582FF7401A0042CA8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F940F2572FF7401A0042CA8F /* Assets.xcassets */; };
 		F949CF752FF3D1D900563A00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F949CF612FF3D1D900563A00 /* LaunchScreen.storyboard */; };
 		F949CF762FF3D1D900563A00 /* ModularProgrammingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F949CF602FF3D1D900563A00 /* ModularProgrammingApp.swift */; };
+		F9AA00012F70000000000001 /* Entry in Frameworks */ = {isa = PBXBuildFile; productRef = F9AA000C2F7000000000000C /* Entry */; };
+		F9AA00022F70000000000002 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F940F2572FF7401A0042CA8F /* Assets.xcassets */; };
+		F9AA00032F70000000000003 /* ModularProgrammingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F949CF602FF3D1D900563A00 /* ModularProgrammingApp.swift */; };
+		F9AA00112F70000000000011 /* Entry in Frameworks */ = {isa = PBXBuildFile; productRef = F9AA001C2F7000000000001C /* Entry */; };
+		F9AA00122F70000000000012 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F940F2572FF7401A0042CA8F /* Assets.xcassets */; };
+		F9AA00132F70000000000013 /* ModularProgrammingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F949CF602FF3D1D900563A00 /* ModularProgrammingApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +43,8 @@
 		F940F2572FF7401A0042CA8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F949CF602FF3D1D900563A00 /* ModularProgrammingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModularProgrammingApp.swift; sourceTree = "<group>"; };
 		F949CF612FF3D1D900563A00 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F9AA00042F70000000000004 /* SPM-Modular-Programming-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SPM-Modular-Programming-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9AA00142F70000000000014 /* SPM-Modular-Programming-visionOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SPM-Modular-Programming-visionOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9C6B3212FF68B3A0016DB29 /* Detail */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Detail; sourceTree = "<group>"; };
 		F9D8166C2F679133002CA898 /* SPM-Modular-Programming.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SPM-Modular-Programming.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9D816852F679135002CA898 /* SPM-Modular-ProgrammingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SPM-Modular-ProgrammingTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +60,22 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F9AA00052F70000000000005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9AA00012F70000000000001 /* Entry in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9AA00152F70000000000015 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9AA00112F70000000000011 /* Entry in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F9D816692F679133002CA898 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -111,6 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				F9D8166C2F679133002CA898 /* SPM-Modular-Programming.app */,
+				F9AA00042F70000000000004 /* SPM-Modular-Programming-macOS.app */,
+				F9AA00142F70000000000014 /* SPM-Modular-Programming-visionOS.app */,
 				F9D816852F679135002CA898 /* SPM-Modular-ProgrammingTests.xctest */,
 				F9D8168F2F679135002CA898 /* SPM-Modular-ProgrammingUITests.xctest */,
 			);
@@ -129,6 +155,46 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F9AA00062F70000000000006 /* SPM-Modular-Programming-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9AA000B2F7000000000000B /* Build configuration list for PBXNativeTarget "SPM-Modular-Programming-macOS" */;
+			buildPhases = (
+				F9AA00082F70000000000008 /* Sources */,
+				F9AA00052F70000000000005 /* Frameworks */,
+				F9AA00072F70000000000007 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SPM-Modular-Programming-macOS";
+			packageProductDependencies = (
+				F9AA000C2F7000000000000C /* Entry */,
+			);
+			productName = "FuturamaInvadersNew-macOS";
+			productReference = F9AA00042F70000000000004 /* SPM-Modular-Programming-macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F9AA00162F70000000000016 /* SPM-Modular-Programming-visionOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9AA001B2F7000000000001B /* Build configuration list for PBXNativeTarget "SPM-Modular-Programming-visionOS" */;
+			buildPhases = (
+				F9AA00182F70000000000018 /* Sources */,
+				F9AA00152F70000000000015 /* Frameworks */,
+				F9AA00172F70000000000017 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SPM-Modular-Programming-visionOS";
+			packageProductDependencies = (
+				F9AA001C2F7000000000001C /* Entry */,
+			);
+			productName = "FuturamaInvadersNew-visionOS";
+			productReference = F9AA00142F70000000000014 /* SPM-Modular-Programming-visionOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		F9D8166B2F679133002CA898 /* SPM-Modular-Programming */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F9D816992F679135002CA898 /* Build configuration list for PBXNativeTarget "SPM-Modular-Programming" */;
@@ -202,6 +268,12 @@
 				LastSwiftUpdateCheck = 2630;
 				LastUpgradeCheck = 2630;
 				TargetAttributes = {
+					F9AA00062F70000000000006 = {
+						CreatedOnToolsVersion = 26.3;
+					};
+					F9AA00162F70000000000016 = {
+						CreatedOnToolsVersion = 26.3;
+					};
 					F9D8166B2F679133002CA898 = {
 						CreatedOnToolsVersion = 26.3;
 					};
@@ -231,6 +303,8 @@
 			projectRoot = "";
 			targets = (
 				F9D8166B2F679133002CA898 /* SPM-Modular-Programming */,
+				F9AA00062F70000000000006 /* SPM-Modular-Programming-macOS */,
+				F9AA00162F70000000000016 /* SPM-Modular-Programming-visionOS */,
 				F9D816842F679135002CA898 /* SPM-Modular-ProgrammingTests */,
 				F9D8168E2F679135002CA898 /* SPM-Modular-ProgrammingUITests */,
 			);
@@ -238,6 +312,22 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F9AA00072F70000000000007 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9AA00022F70000000000002 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9AA00172F70000000000017 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9AA00122F70000000000012 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F9D8166A2F679133002CA898 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -264,6 +354,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F9AA00082F70000000000008 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9AA00032F70000000000003 /* ModularProgrammingApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9AA00182F70000000000018 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9AA00132F70000000000013 /* ModularProgrammingApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F9D816682F679133002CA898 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -302,6 +408,132 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		F9AA00092F70000000000009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "SPM MP";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iha.ModularProgramming.macOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		F9AA000A2F7000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "SPM MP";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iha.ModularProgramming.macOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		F9AA00192F70000000000019 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "SPM MP";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iha.ModularProgramming.visionOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 7;
+				XROS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		F9AA001A2F7000000000001A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "SPM MP";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iha.ModularProgramming.visionOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 7;
+				XROS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
 		F9D816972F679135002CA898 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -468,9 +700,11 @@
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				TARGETED_DEVICE_FAMILY = "1,2,3";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -481,6 +715,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -496,12 +733,15 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iha.ModularProgramming;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				TARGETED_DEVICE_FAMILY = "1,2,3";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -587,6 +827,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F9AA000B2F7000000000000B /* Build configuration list for PBXNativeTarget "SPM-Modular-Programming-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9AA00092F70000000000009 /* Debug */,
+				F9AA000A2F7000000000000A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9AA001B2F7000000000001B /* Build configuration list for PBXNativeTarget "SPM-Modular-Programming-visionOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9AA00192F70000000000019 /* Debug */,
+				F9AA001A2F7000000000001A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F9D816672F679133002CA898 /* Build configuration list for PBXProject "SPM-Modular-Programming" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -627,6 +885,14 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		F93AE6A12FF61C6D00840F84 /* Entry */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Entry;
+		};
+		F9AA000C2F7000000000000C /* Entry */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Entry;
+		};
+		F9AA001C2F7000000000001C /* Entry */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Entry;
 		};

@@ -15,4 +15,5 @@ public struct Details: Codable, Equatable, Sendable {
     public var color: Color {
         return colorString?.toColor() ?? .white
     }
+    public var isColorInverted: Bool = false
 }

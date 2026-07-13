@@ -5,24 +5,25 @@ import Tools
 @testable import Entry
 
 /// Verifies TabStack.ViewModel initial state and actions.
+@MainActor
 struct TabStackViewModelTests {
 
     @Test func testInitialStateUsesFirstTab() async throws {
-        let viewModel = await makeViewModel()
+        let viewModel = makeViewModel()
         
-        #expect(await viewModel.state == .idle)
-        #expect(await viewModel.selectedTab == .first)
+        #expect(viewModel.state == .idle)
+        #expect(viewModel.selectedTab == .first)
     }
     
     @Test func testOnAppearSetsLoadedState() async throws {
-        let viewModel = await makeViewModel()
+        let viewModel = makeViewModel()
         
         await viewModel.handle(action: .onAppear)
         
-        #expect(await viewModel.state == .loaded)
+        #expect(viewModel.state == .loaded)
     }
     
-    private func makeViewModel() async  -> TabStack.ViewModel {
-        await TabStack.ViewModel(router: PreviewRouter<EntryRoute>().routerBinding)
+    private func makeViewModel() -> TabStack.ViewModel {
+        TabStack.ViewModel(router: PreviewRouter<EntryRoute>().routerBinding)
     }
 }

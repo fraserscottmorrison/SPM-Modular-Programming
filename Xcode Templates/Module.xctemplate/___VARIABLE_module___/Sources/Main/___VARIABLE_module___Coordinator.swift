@@ -5,10 +5,10 @@ import Tools
 
 extension ___VARIABLE_module___Coordinator {
 
-    @ViewBuilder private func navigateTo(route: ___VARIABLE_module___Route, path: Binding<NavigationPath>) -> some View {
+    @ViewBuilder private func navigateTo(route: ___VARIABLE_module___Route, router: Binding<Router<___VARIABLE_module___Route>>) -> some View {
         switch route {
         case .initialRoute:
-            ___VARIABLE_viewName___(router: $router)
+            ___VARIABLE_viewName___(router: router)
         }
     }
 }

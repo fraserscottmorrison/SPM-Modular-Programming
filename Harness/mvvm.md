@@ -3,6 +3,7 @@
 ## When To Load
 
 - Use this compatibility entrypoint when an older instruction points to `Harness/mvvm.md`.
+- Use for SwiftUI view, nested Observation ViewModel, `ViewState`, `ViewAction`, or state-management work.
 
 ## Guidance
 

@@ -52,9 +52,7 @@ public enum HTTPMethod {
 
 public struct Endpoint: Sendable {
     public let path: String
-    #if DEBUG
     public var bundle: Bundle = .main
-    #endif
     
     public init(path: String) {
         self.path = path

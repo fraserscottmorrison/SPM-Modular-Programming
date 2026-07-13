@@ -2,13 +2,17 @@
 import PackageDescription
 import Foundation
 
-let isDebug = ProcessInfo.processInfo.environment["IS_DEBUG"] != "true"
+let isDebug = ProcessInfo.processInfo.environment["IS_RELEASE"] != "true"
 
 let package = Package(
     name: "Entry",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v26)
+        .iOS(.v26),
+        .macOS(.v26),
+        .tvOS(.v26),
+        .watchOS(.v26),
+        .visionOS(.v26)
     ],
     products: [
         .library(
@@ -21,7 +25,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Detail"),
-        .package(path: "../Tools")
+        .package(path: "../../SharedPackages/Tools")
     ],
     targets: [
         .target(
@@ -41,7 +45,8 @@ let package = Package(
         .target(
             name: "Entry",
             dependencies: ["EntryConcurrent", "Detail", "Tools"],
-            path: "Sources/Main"
+            path: "Sources/Main",
+            resources: [.process("Resources")]
         ),
         .testTarget(
             name: "EntryUnitTests",

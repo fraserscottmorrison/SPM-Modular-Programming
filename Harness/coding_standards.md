@@ -2,24 +2,25 @@
 
 ## Goal
 
-Capture the live Swift coding conventions that agents should follow when editing this repository.
+Capture live Swift conventions that agents should follow when editing this repository.
 
 ## When To Load
 
 - Any Swift code edit.
 - Adding doc comments, changing naming, choosing framework APIs, or adding previews/tests.
-- Investigating lint, logging, or concurrency style.
+- Investigating style, logging, lint, or concurrency choices.
 
-## Applicability Evidence
+## Swift And Framework Standards
 
-- Package manifests use `// swift-tools-version:6.2` and `.iOS(.v26)`.
-- Xcode project uses Swift 6.0 settings with approachable concurrency flags and main-actor default isolation.
-- Live ViewModels are `@MainActor` classes and SwiftUI views rely on main-thread state.
-- No SwiftLint config or script was found.
+- Package manifests use Swift tools 6.2.
+- Xcode build settings use Swift 6.0 plus approachable concurrency and default main-actor isolation.
+- Use SwiftUI for UI surfaces.
+- Use Swift Observation for current ViewModels: `@MainActor @Observable final class ViewModel: VMProtocol`.
+- Use `@State` to store Observation ViewModels in SwiftUI views.
+- Use `@ObservationIgnored` for router bindings or other values that should not participate in Observation.
+- Use `NavigationStack`, `NavigationPath`, and the shared `Router`/coordinator infrastructure for navigation.
 
-## Guidance
-
-### naming_conventions
+## Naming Conventions
 
 | Entity | Convention | Example |
 | --- | --- | --- |
@@ -32,64 +33,46 @@ Capture the live Swift coding conventions that agents should follow when editing
 | ViewModel file | `<View>+ViewModel.swift` | `DetailView+ViewModel.swift` |
 | Tests | `<Subject>Tests` | `DetailViewModelTests` |
 
-### framework_preferences
+## Access Control
 
-- Use SwiftUI for UI surfaces in live packages.
-- Use Swift concurrency and `@MainActor` for UI/ViewModel code.
-- Use `ObservableObject` and `@Published` for current live ViewModels unless the project confirms a move to `@Observable`.
-- Use `NavigationStack`, `NavigationPath`, and the shared `Router` for navigation.
-- Use XCTest for current `Entry` and `Detail` tests; `Tools` currently has a Swift Testing smoke test.
+- Public: cross-package entrypoints, routes, coordinators, views, protocols, and utilities consumed by another package.
+- Internal/default: feature-local types and helpers.
+- Private/fileprivate: view-only helpers, route-builder functions, and implementation details.
+- Keep public comments brief and factual.
 
-### comments_and_docs
+## Comments And Docs
 
-- Keep type doc comments brief and factual.
-- Add explanatory comments only for non-obvious constraints or invariants.
-- Do not add comments that reference the current task or issue number.
+- Keep type doc comments one-line and useful.
+- Add comments only for non-obvious constraints, invariants, or platform caveats.
+- Do not add comments that reference a chat request, current task, or issue unless the user asks.
 
-### logging_approach
+## Logging And Lint
 
-- No live logging wrapper or logger implementation was found.
-- Do not add `print` or a new logging framework without project confirmation.
+- No live logging wrapper exists. Do not add `print` or a logging framework without project confirmation.
+- No SwiftLint config exists. Treat compiler diagnostics and tests/builds as the current quality gate.
 
-### lint_rules
+## Platform Availability
 
-- No lint configuration was found.
-- Treat compiler diagnostics and tests as the current quality gate.
+- Packages target iOS, macOS, tvOS, watchOS, and visionOS.
+- Guard platform-specific SwiftUI APIs with `#if os(...)` when availability differs.
+- Current examples: macOS uses `.sheet` for full-screen modal fallback, `.automatic` toolbar placement, and skips `StackNavigationViewStyle()`.
 
 ## Accuracy Contracts
 
 ### Do
 
-- Match existing access-control style: public API for cross-package entrypoints, internal/default for feature internals, private for view-only helpers.
-- Keep `#Preview` blocks in SwiftUI view files when dependencies can be satisfied.
-- Prefer live source over stale templates when style differs.
+- Match existing file organization and access control.
+- Keep `#Preview` blocks when dependencies can be satisfied with `PreviewRouter`.
+- Prefer live source over templates when style differs.
+- Add tests when behavior changes.
 
 ### Do Not
 
-- Do not claim SwiftLint rules exist until a config or script is added.
-- Do not use deleted or absent logging utilities from stale harness docs.
+- Do not introduce `ObservableObject`, `@Published`, or `@StateObject` for new ViewModels unless preserving an existing older type.
+- Do not claim lint or logging infrastructure exists until config/source is added.
 - Do not introduce global state or direct platform APIs when a shared package abstraction already exists.
-
-### Expected Output Shape
-
-- Swift code changes should be minimal, compile in the owning package, and include tests when behavior changes.
-- Public cross-package types should have one-line `///` comments.
-
-## Existing Harness Sources Used
-
-| Source | Evidence Used |
-| --- | --- |
-| `Packages/*/Package.swift` | Swift tools and platform versions. |
-| `SPM-Modular-Programming.xcodeproj/project.pbxproj` | Swift version and concurrency build settings. |
-| Live package sources | Naming, previews, access control, ViewModel style. |
-
-## Needs Project Confirmation
-
-- Whether a lint tool is intended.
-- Whether a logging utility should be restored.
-- Whether new ViewModels should migrate to `@Observable`.
 
 ## Verification
 
 - Use editor diagnostics for touched files.
-- Run the narrow package or Xcode scheme test that owns the changed code when available.
+- Run the narrow package build/test or Xcode scheme build that owns the changed code.

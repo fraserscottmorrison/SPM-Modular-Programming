@@ -3,6 +3,16 @@
 import SwiftUI
 import Tools
 
+extension EntryCoordinator {
+
+    @ViewBuilder private func navigateTo(route: EntryRoute, router: Binding<Router<EntryRoute>>) -> some View {
+        switch route {
+        case .tabStack:
+            TabStack(router: router)
+        }
+    }
+}
+
 /// Hosts the Entry module tab stack with shared routing state.
 public struct EntryCoordinator: View {
 
@@ -13,6 +23,8 @@ public struct EntryCoordinator: View {
     }
 
     public var body: some View {
-        TabStack(router: $router)
+        getCoordinatorView(initialRoute: .tabStack,
+                        router: $router,
+                        viewByRoute: navigateTo)
     }
 }

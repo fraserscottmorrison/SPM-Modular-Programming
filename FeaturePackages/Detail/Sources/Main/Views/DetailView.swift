@@ -18,7 +18,7 @@ public struct DetailView: View {
             switch viewModel.state {
             case .loaded(let details):
                 ZStack {
-                    details.color
+                    self.getColor(for: details, isBackground: true)
                         .ignoresSafeArea()
                     VStack {
                         Spacer()
@@ -33,7 +33,7 @@ public struct DetailView: View {
                     }
                     .padding(.horizontal, 24)
                 }
-                .foregroundColor(.white)
+                .foregroundColor(self.getColor(for: details, isBackground: false))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             case .loading:
                 ProgressView()
@@ -46,12 +46,37 @@ public struct DetailView: View {
             viewModel.action(.onAppear)
         }
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button("Push Next") {
+            ToolbarItem(placement: nextButtonPlacement) {
+                Button("Next") {
                     self.viewModel.action(.onNext)
                 }
                 .font(Font.title3)
+                .fontWeight(.medium)
                 .tint(.black)
+            }
+        }
+    }
+
+    private var nextButtonPlacement: ToolbarItemPlacement {
+        #if os(macOS)
+        .automatic
+        #else
+        .topBarTrailing
+        #endif
+    }
+
+    func getColor(for details: Details, isBackground: Bool) -> Color {
+        if isBackground {
+            if details.isColorInverted {
+                Color.white
+            } else {
+                details.color
+            }
+        } else {
+            if details.isColorInverted {
+                details.color
+            } else {
+                Color.white
             }
         }
     }

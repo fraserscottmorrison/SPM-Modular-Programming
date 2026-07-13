@@ -3,6 +3,7 @@
 ## When To Load
 
 - Use this compatibility entrypoint when an older instruction points to `Harness/coordinator-routing.md`.
+- Use for route, coordinator, router, tab, sheet, full-screen, and nested navigation work.
 
 ## Guidance
 

@@ -1,5 +1,6 @@
 {
     "name": "Chris Wood",
-    "description": "Wood's prefers Italian cuisine such as pasta and also likes Greek-style food with chicken and vegetables. His favourite New Zealand food is mince and cheese pie",
-    "colorString": "#FFFFFF"
+    "description": "Chris Wood prefers Italian cuisine such as pasta and also likes Greek-style food with chicken and vegetables. His favourite New Zealand food is the mince and cheese pie, a Kiwi classic",
+    "colorString": "#000000",
+    "isColorInverted": true
 }

@@ -11,6 +11,7 @@ public enum PresentationStyle: String, Hashable, Codable {
 }
 
 /// Describes navigation operations shared by route routers.
+@MainActor
 public protocol RouterProtocol: AnyObject {
     associatedtype R = Route
 
@@ -32,7 +33,8 @@ extension RouterProtocol {
 }
 
 /// Drives route-based navigation state for pushes and modal presentations.
-open class Router<R>: RouterProtocol where R: Route {
+@MainActor
+open class Router<R>: ObservableObject, RouterProtocol where R: Route {
     private var pathCount = 0
     public let isModal: Bool
     @Binding public var path: NavigationPath

@@ -1,5 +1,6 @@
 {
     "name": "Lionel Messi",
     "description": "Messi's favourite food is Milanesa Napolitana, a classic Argentine dish made of a crispy breaded cutlet of beef or chicken, topped with tomato sauce, ham, and melted mozzareella cheese",
-    "colorString": "#6CACE4"
+    "colorString": "#6CACE4",
+    "isColorInverted": false
 }

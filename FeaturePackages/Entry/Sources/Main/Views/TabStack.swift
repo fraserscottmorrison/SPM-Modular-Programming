@@ -33,7 +33,9 @@ public struct TabStack: View {
             }
         }
         .tint(.red)
+        #if !os(macOS)
         .navigationViewStyle(StackNavigationViewStyle())
+        #endif
     }
 
     private var isRegularWidth: Bool {
