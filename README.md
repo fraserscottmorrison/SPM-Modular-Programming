@@ -61,7 +61,6 @@ Give SPM Modular Programming a test drive with the reference project. Features i
 - SwiftUI with an MVVM-C intra-package architecture.
 - `NavigationStack`s configured for inter-package routing. See the reference project for implementation details.
 - `NavigationSplitView` for an iPad optimised UX - and support for all Apple OS's (even you visionOS)
-- 
 - Xcode Templates to quickly generate new packages and views.
 - A complete agentic development harness for efficient and accurate agentic code contributions, leveraging the provided Xcode Templates.
 
