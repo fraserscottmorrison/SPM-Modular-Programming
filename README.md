@@ -56,6 +56,10 @@ Package/
 - Each package has a Mocks target to contain their own mocks. SPM traits are used to exclude them from release builds
 - Designed for agents. Say goodbye to vibe coding and welcome efficient, accurate agentic contributions through a well-defined architecture and optimized development harness.
 
+## Harness
+The reference project include agentic harness documentation optimised for agents to accurately contribute features.
+As your project grows the harness must be maintained and optimised to remain effective
+
 ## Reference Project
 Give SPM Modular Programming a test drive with the reference project. Features include:
 - SwiftUI with an MVVM-C intra-package architecture.
@@ -64,9 +68,7 @@ Give SPM Modular Programming a test drive with the reference project. Features i
 - Xcode Templates to quickly generate new packages and views.
 - A complete agentic development harness for efficient and accurate agentic code contributions, leveraging the provided Xcode Templates.
 
-## Harness
-The reference project include agentic harness documentation optimised for agents to accurately contribute features.
-As your project grows the harness must be maintained and optimised to remain effective
+https://github.com/user-attachments/assets/dfa8d351-b7d3-4975-b3f2-a8ffef729631
 
 ## Limitations
 Every architecture has its strengths and weaknesses. If an author isn't clear about both, they either aren't being honest or they don't understand the architecture deeply enough.
