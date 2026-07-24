@@ -47,8 +47,16 @@ extension DetailView {
                     }
                 }
             case .onNext:
-                let nextIndex = Int.random(in: 0...4)
-                let nextStyle: PresentationStyle = Int.random(in: 0...1) == 0 ? .push : .formSheet
+                var nextIndex = Int.random(in: 0...4)
+                var nextStyle: PresentationStyle = Int.random(in: 0...1) == 0 ? .push : .formSheet
+                if self.index == 0 {
+                    nextIndex = 2
+                    nextStyle = .push
+                }
+                if self.index == 1 {
+                    nextIndex = 3
+                    nextStyle = .formSheet
+                }
                 self.router.navigateTo(.initialRoute(nextIndex), style: nextStyle)
             }
         }

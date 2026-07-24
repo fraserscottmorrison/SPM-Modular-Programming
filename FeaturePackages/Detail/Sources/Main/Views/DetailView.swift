@@ -47,7 +47,7 @@ public struct DetailView: View {
         }
         .toolbar {
             ToolbarItem(placement: nextButtonPlacement) {
-                Button("Next") {
+                Button(self.viewModel.index == 0 ? "Push" : "FormSheet") {
                     self.viewModel.action(.onNext)
                 }
                 .font(Font.title3)
